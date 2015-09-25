@@ -31,13 +31,13 @@
 
 - (BOOL)AI_calcNextAction
 {
-    
-    return YES;
+    return randomSkillAndTarget(_src, _world.aliveSet, self);
 }
 
 
 - (NSArray *)doAction
 {
+    
     return nil;
 }
 

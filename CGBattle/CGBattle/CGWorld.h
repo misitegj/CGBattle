@@ -12,7 +12,7 @@
 #define kTeamBLocationOffset 10
 
 
-@class CGBattleUnit;
+@class CGBattleUnit, CGAction;
 
 @interface CGWorld : NSObject
 
@@ -36,7 +36,7 @@
 @end
 
 
-
+extern BOOL randomSkillAndTarget(CGBattleUnit *src, id units, CGAction* action);
 extern CGBattleUnit* randomTarget(CGBattleUnit *src, id units, CGSkillTargetAvailable skTarAva);
 extern BOOL canTarget(CGBattleUnit *src, CGBattleUnit *des, CGSkillTargetAvailable tarAva);
 

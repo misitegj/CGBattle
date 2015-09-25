@@ -147,6 +147,7 @@
     
     for (CGBattleUnit *unit in _world.aliveSet) {
         CGAction *a = [[CGAction alloc] initWithUnit:unit world:_world];
+        [a AI_calcNextAction];
         [actions addObject:a];
     }
     
@@ -181,6 +182,7 @@
         }
         
         if ([self unitCanAction:unit]) {
+            
             CGSkill *sk = [CGSkill skillWithSID:action.skillID];
             NSArray *l = [sk battleLogsWithUnits:_world.aliveSet
                                           srcLoc:action.srcLoc

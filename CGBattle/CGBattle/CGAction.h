@@ -12,12 +12,14 @@
 
 
 @interface CGAction : NSObject
+@property (nonatomic, assign) int order;
 
 @property (nonatomic, strong, readonly) CGBattleUnit *src; // 行动者
 @property (nonatomic, assign, readonly) int srcLoc; // 行动者位置
-@property (nonatomic, assign) int order;
 
+@property (nonatomic, strong) CGBattleUnit *des;
 @property (nonatomic, assign) int desLoc; // 下一步行动的对象位置
+
 @property (nonatomic, assign) int skillID; // 下一步行动的技能ID
 
 @property (nonatomic, strong) NSArray *logs; // action logs

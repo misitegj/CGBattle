@@ -9,7 +9,7 @@
 #import "CGWorld.h"
 #import "CGBattleUnit.h"
 #import "CGBattle.h"
-
+#import "CGAction.h"
 
 @interface CGWorld()
 
@@ -99,8 +99,24 @@
 @end
 
 
+BOOL randomSkillAndTarget(CGBattleUnit *src, id units, CGAction* action)
+{
+#warning TODO
+    int sid = 0;
+    
+    CGSkill *sk = [CGSkill skillWithSID:sid];
+    CGBattleUnit *tar = randomTarget(src, units, sk.targetAvailable);
 
-
+    if (!tar) {
+        return 0;
+    }
+    
+    action.skillID = sid;
+    action.desLoc = tar.location;
+    action.des = tar;
+    
+    return 1;
+}
 
 CGBattleUnit* randomTarget(CGBattleUnit *src, id units, CGSkillTargetAvailable skTarAva)
 {
