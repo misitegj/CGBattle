@@ -28,6 +28,9 @@ typedef void (^bRoundStateBlock)(CGRound *r);
     CGRoundState _roundState;
     CGWorld *_world;
     int _round;
+    
+    NSMutableArray *_actions;
+    NSMutableArray *_sortedActions;
 }
 
 @property (nonatomic, assign, readonly) int round;

@@ -24,6 +24,7 @@
 		185A9BAC1BB42A14005C7A5C /* CGRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BAB1BB42A14005C7A5C /* CGRound.m */; };
 		185A9BAF1BB42A35005C7A5C /* CGWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BAE1BB42A35005C7A5C /* CGWorld.m */; };
 		185A9BB21BB42E13005C7A5C /* EMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BB11BB42E13005C7A5C /* EMLogManager.m */; };
+		964D183C1BB5240C00157C83 /* CGAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 964D183B1BB5240C00157C83 /* CGAction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		185A9BAE1BB42A35005C7A5C /* CGWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGWorld.m; sourceTree = "<group>"; };
 		185A9BB01BB42E13005C7A5C /* EMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMLogManager.h; sourceTree = "<group>"; };
 		185A9BB11BB42E13005C7A5C /* EMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLogManager.m; sourceTree = "<group>"; };
+		964D183A1BB5240C00157C83 /* CGAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAction.h; sourceTree = "<group>"; };
+		964D183B1BB5240C00157C83 /* CGAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				1801506B1BAD5F3F0081A5E9 /* CGUnit.m */,
 				180150761BAE59740081A5E9 /* CGSkill.h */,
 				180150771BAE59740081A5E9 /* CGSkill.m */,
+				964D183A1BB5240C00157C83 /* CGAction.h */,
+				964D183B1BB5240C00157C83 /* CGAction.m */,
 				180150731BAE58EA0081A5E9 /* CGBattleUnit.h */,
 				180150741BAE58EA0081A5E9 /* CGBattleUnit.m */,
 				180150791BAE5E3D0081A5E9 /* CGBattleLog.h */,
@@ -277,6 +282,7 @@
 				185A9BAF1BB42A35005C7A5C /* CGWorld.m in Sources */,
 				180150721BAE2F200081A5E9 /* CG.m in Sources */,
 				1801506C1BAD5F3F0081A5E9 /* CGUnit.m in Sources */,
+				964D183C1BB5240C00157C83 /* CGAction.m in Sources */,
 				185A9BA61BB429FE005C7A5C /* CGBattle.m in Sources */,
 				180150781BAE59740081A5E9 /* CGSkill.m in Sources */,
 				180150471BAD5E8D0081A5E9 /* main.m in Sources */,

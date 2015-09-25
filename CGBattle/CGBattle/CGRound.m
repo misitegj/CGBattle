@@ -10,10 +10,10 @@
 #import "CGWorld.h"
 #import "CGBattleUnit.h"
 #import "CGBattle.h"
+#import "CGAction.h"
 
 @interface CGRound(){
     
-    NSMutableArray *_sortedUnits;   // 出手顺序排序后的单位数组
 }
 
 @end
@@ -101,7 +101,6 @@
                 break;
         }
         
-        
         if (_roundState != nextState) {
             if (self.bRoundStateDidEndBlock) {
                 self.bRoundStateDidEndBlock(self);
@@ -144,15 +143,29 @@
 - (void)roundAISelectAction:(int)round
 {
     // 所有对象 选择完技能和对象
+    NSMutableArray *actions = [NSMutableArray array];
+    
     for (CGBattleUnit *unit in _world.aliveSet) {
-        [unit AI_calcTargetsWithUnits:_world.aliveSet];
+        CGAction *a = [[CGAction alloc] initWithUnit:unit world:_world];
+        [actions addObject:a];
     }
+    
+    _actions = actions;
 }
 
 - (void)roundSort:(int)round
 {
+    // 设置行动序列
+    NSArray *sortedActions = nil;
+    
+    BOOL isRandom = [self isRandomAgi]; // 是否乱敏
+    if (isRandom)
+        sortedActions =[self sortActionsByRandom:_actions];
+    else
+        sortedActions =[self sortActionsByAgi:_actions];
+    
     // 行动顺序排序
-    _sortedUnits = [[self sortUnits] mutableCopy];
+    _actions = [sortedActions mutableCopy];
 }
 
 - (NSArray *)roundUnitsAction:(int)round
@@ -160,13 +173,18 @@
     NSMutableArray *logs = [NSMutableArray array];
     
     // 计算人物行动
-    for (CGBattleUnit *unit in _sortedUnits) {
+    for (CGAction *action in _actions) {
+        CGBattleUnit *unit = action.src;
+        
         if ([_world isOneTeamAllDead]) {// 每一个人行动结束, 都要判断是否结束
             break;
         }
         
         if ([self unitCanAction:unit]) {
-            NSArray *l = [unit AI_actionLogsWithUnits:_world.aliveSet];
+            CGSkill *sk = [CGSkill skillWithSID:action.skillID];
+            NSArray *l = [sk battleLogsWithUnits:_world.aliveSet
+                                          srcLoc:action.srcLoc
+                                          desLoc:action.desLoc];
             [logs addObjectsFromArray:l];
         }
         else {
@@ -188,82 +206,53 @@
 
 # pragma mark - Utils
 
-
-- (NSArray *)sortUnits
-{
-    // 设置行动序列
-    NSArray *sortedArray = nil;
-    
-    BOOL isRandom = [self isRandomAgi]; // 是否乱敏
-    if (isRandom)
-        sortedArray =[self sortUnitsByRandom:_world.aliveSet];
-    else
-        sortedArray =[self sortUnitsByAgi:_world.aliveSet];
-    
-    return sortedArray;
-}
-
 // 是否乱敏
 - (BOOL)isRandomAgi
 {
     return CGJudgeRandomFloat(0.3f);
 }
 
-- (NSMutableArray *)sortUnitsByRandom:(NSMutableSet *)aliveSet
+- (NSArray *)sortActionsByRandom:(NSArray *)array
 {
-    assert([aliveSet count]>0);
+    assert([array count]>0);
     
-    NSMutableSet *set = [aliveSet mutableCopy];
+    NSArray *originArray = [array copy];
+    
+    NSMutableSet *set = [NSMutableSet setWithArray:originArray];
     NSMutableArray *arr = [NSMutableArray array];
     
     int i = 0;
     do{
-        CGBattleUnit *unit = [set anyObject];
-        unit.actionOrder = i++;
-        [set removeObject:unit];
-        [arr addObject:unit];
+        CGAction *a = [set anyObject];
+        a.order = i++;
+        [set removeObject:a];
+        [arr addObject:a];
         
     }while ([set count]>0);
     
-    return arr;
+    return [NSArray arrayWithArray:arr];
 }
 
 typedef NSComparisonResult (^NSComparator)(id unit1, id unit2);
 
-- (NSMutableArray *)sortUnitsByAgi:(NSMutableSet *)aliveSet
+- (NSArray *)sortActionsByAgi:(NSArray *)array
 {
-    assert([aliveSet count]>0);
+    assert([array count]>0);
+    NSArray *originArray = [array copy];
     
-    NSArray *result = [aliveSet.allObjects sortedArrayUsingComparator:^NSComparisonResult(CGBattleUnit *o1, CGBattleUnit *o2){
-        
-        if (o1.agi==o2.agi) {
+    NSArray *arr = [originArray sortedArrayUsingComparator:^NSComparisonResult(CGAction *a1, CGAction *a2){
+        if (a1.src.agi == a2.src.agi) {
             return CGRandom(2);
         }
-        return o1.agi < o2.agi;
+        return a1.src.agi < a2.src.agi;
     }];
     
-    for (int i=0; i<[result count]; i++) {
-        CGBattleUnit *unit = [result objectAtIndex:i];
-        unit.actionOrder = i;
+    for (int i=0; i<[arr count]; i++) {
+        CGAction *a = [arr objectAtIndex:i];
+        a.order = i;
     }
     
-    return [result mutableCopy];
-}
-
-- (NSMutableArray *)ojbsByActionOrder:(NSMutableArray *)units
-{
-    assert([units count]>0);
-    
-    NSArray *result = [units sortedArrayUsingComparator:^NSComparisonResult(CGBattleUnit *o1, CGBattleUnit *o2){
-        return o1.actionOrder < o2.actionOrder;
-    }];
-    
-    for (int i=0; i<[result count]; i++) {
-        CGBattleUnit *unit = [result objectAtIndex:i];
-        unit.actionOrder = i;
-    }
-    
-    return [result mutableCopy];
+    return [NSArray arrayWithArray:arr];
 }
 
 - (void)removeDeadUnitsFromAliveSet

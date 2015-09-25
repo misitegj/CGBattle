@@ -11,16 +11,18 @@
 
 typedef enum {
     
-    CGBattleUnitAction,
-    CGBattleUnitDidAction,
-    CGBattleUnitEndAction,
+    CGActionUnitPrepare,
     
-    CGBattleUnitWillHurt,
-    CGBattleUnitDidHurt,
+    CGActionUnitWillAction,
+    CGActionUnitDidAction,
+    CGActionUnitEndAction,
     
-} CGBattleUnitState;
+    CGActionUnitWillHurt,
+    CGActionUnitDidHurt,
+    
+} CGActionState;
 
-
+@class CGWorld;
 
 @interface CGBattleUnit : NSObject
 
@@ -58,24 +60,10 @@ typedef enum {
 @property (nonatomic, assign) int crtDodge;
 
 @property (nonatomic, assign) int location; // 位置0-9
-@property (nonatomic, assign) int actionOrder; // 行动顺序
 @property (nonatomic, assign) int isAlive; // 是否存活
-
-@property (nonatomic, assign) int actionTargetLocation; // 下一步行动的对象位置
-@property (nonatomic, assign) int actionSkillID; // 下一步行动的技能ID
-
 
 - (instancetype)initWithUnit:(CGUnit *)unit;
 
-// 选择目标和使用技能
-- (void)AI_calcTargetsWithUnits:(NSMutableSet *)set;
-
-// 输出行动日志
-- (NSMutableArray *)AI_actionLogsWithUnits:(NSMutableSet *)units;
-
 @end
-
-extern BOOL canTarget(CGBattleUnit *src, CGBattleUnit *des, CGSkillTargetAvailable tarAva);
-extern CGBattleUnit* randomTarget(CGBattleUnit *src, id units, CGSkillTargetAvailable skTarAva);
 
 

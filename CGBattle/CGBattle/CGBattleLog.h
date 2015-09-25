@@ -19,7 +19,6 @@
 @property (nonatomic, assign) int value; // 作用的数值
 @property (nonatomic, assign) int isHit; // 是否命中
 
-
 - (NSString *)description;
 
 @end

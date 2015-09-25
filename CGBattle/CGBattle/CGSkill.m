@@ -9,6 +9,7 @@
 #import "CGSkill.h"
 #import "CGBattleUnit.h"
 #import "CGBattleLog.h"
+#import "CGWorld.h"
 
 @implementation CGSkillBuff
 

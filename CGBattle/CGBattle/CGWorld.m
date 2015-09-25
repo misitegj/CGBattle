@@ -97,3 +97,75 @@
 }
 
 @end
+
+
+
+
+
+CGBattleUnit* randomTarget(CGBattleUnit *src, id units, CGSkillTargetAvailable skTarAva)
+{
+    assert([units count]>0);
+    
+    NSMutableSet *set = nil;
+    
+    if ([units isKindOfClass:[NSSet class]]) {
+        set = [units mutableCopy];
+    }
+    if ([units isKindOfClass:[NSArray class]]) {
+        set = [NSMutableSet setWithArray:units];
+    }
+    
+    do {
+        CGBattleUnit *unit = [set anyObject];
+        
+        if (unit.isAlive && canTarget(src, unit, skTarAva)) {
+            return unit;
+        }
+        [set removeObject:unit];
+        
+    }while ([set count]>0) ;
+    
+    assert(0);
+    return nil;
+}
+
+
+BOOL canTarget(CGBattleUnit *src, CGBattleUnit *des, CGSkillTargetAvailable tarAva)
+{
+    if (src == des) {
+        if (tarAva & CGSkillTargetAvailableSelf) {
+            return YES;
+        }
+    }
+    else{
+        if (tarAva & CGSkillTargetAvailableFriend) {
+            if (src.belong == des.belong) {
+                return YES;
+            }
+        }
+        if (tarAva & CGSkillTargetAvailableEnemy) {
+            if (src.belong != des.belong) {
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
+}
+
+//{
+//    NSMutableArray *logs = [NSMutableArray array];
+//    [logs addObjectsFromArray:[self _actionLogsActionWithUnits:world]];
+//
+//    return logs;
+//}
+//
+//- (NSMutableArray *)_actionLogsActionWithUnits:(CGWorld *)world
+//{
+//    CGSkill *sk = [CGSkill skillWithSID:self.actionSkillID];
+//
+//    return [sk battleLogsWithUnits:world.aliveSet srcLoc:self.location desLoc:self.actionTargetLocation];
+//}
+//
+
+

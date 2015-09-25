@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CGSkill.h"
 
 #define kTeamBLocationOffset 10
+
+
+@class CGBattleUnit;
 
 @interface CGWorld : NSObject
 
@@ -28,4 +32,11 @@
 - (BOOL)hasDefersAlive;
 
 - (BOOL)isOneTeamAllDead;
+
 @end
+
+
+
+extern CGBattleUnit* randomTarget(CGBattleUnit *src, id units, CGSkillTargetAvailable skTarAva);
+extern BOOL canTarget(CGBattleUnit *src, CGBattleUnit *des, CGSkillTargetAvailable tarAva);
+

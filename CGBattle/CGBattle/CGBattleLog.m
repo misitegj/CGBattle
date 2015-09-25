@@ -281,15 +281,15 @@
 {
     assert([self.deses count]>0);
     
-    if (!self.desc) {
-        NSMutableString *mstr = [[NSMutableString alloc] init];
-        
-        for (CGBattleUnit *unit in self.deses) {
-            CGSkill *sk = [CGSkill skillWithSID:unit.actionSkillID];
-            [mstr appendFormat:@"%@[%d] %@ [%d]位 \n", unit.origin.name, unit.location, sk.name, unit.actionTargetLocation];
-        }
-        self.desc = mstr;
-    }
+//    if (!self.desc) {
+//        NSMutableString *mstr = [[NSMutableString alloc] init];
+//        
+//        for (CGBattleUnit *unit in self.deses) {
+//            CGSkill *sk = [CGSkill skillWithSID:unit.actionSkillID];
+//            [mstr appendFormat:@"%@[%d] %@ [%d]位 \n", unit.origin.name, unit.location, sk.name, unit.actionTargetLocation];
+//        }
+//        self.desc = mstr;
+//    }
     
     return self.desc;
 }
@@ -311,14 +311,14 @@
 {
     assert([self.deses count]>0);
     
-    if (!self.desc) {
-        NSMutableString *mstr = [[NSMutableString alloc] init];
-        
-        for (CGBattleUnit *unit in self.deses) {
-            [mstr appendFormat:@"%@ 第[%d]出手 \n", unit.origin.name, unit.actionOrder];
-        }
-        self.desc = mstr;
-    }
+//    if (!self.desc) {
+//        NSMutableString *mstr = [[NSMutableString alloc] init];
+//        
+//        for (CGBattleUnit *unit in self.deses) {
+//            [mstr appendFormat:@"%@ 第[%d]出手 \n", unit.origin.name, unit.actionOrder];
+//        }
+//        self.desc = mstr;
+//    }
     
     return self.desc;
 }
