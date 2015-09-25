@@ -12,7 +12,7 @@
 
 @interface CGBattleWorld : NSObject
 
-@property (nonatomic, strong) NSMutableSet *aliveSet;        // 存活单位集合 CGBattleObject
+@property (nonatomic, strong) NSMutableSet *aliveSet;        // 存活单位集合 CGBattleUnit
 @property (nonatomic, strong) NSMutableSet *deadSet;         // 死亡单位集合
 
 

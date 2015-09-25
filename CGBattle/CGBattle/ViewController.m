@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "CGBattleManager.h"
-#import "CGObject.h"
+#import "CGUnit.h"
 #import "CGBattleLog.h"
 
 @interface ViewController ()
@@ -24,107 +24,107 @@
 }
 
 - (IBAction)doNewFight:(id)sender {
-    CGObject *obj0 = [[CGObject alloc] init];
-    obj0.name = @"张辽";
-    obj0.hp = 135;
-    obj0.atk = 120;
-    obj0.def = 90;
-    obj0.belong = 0;
-    obj0.OID = 100;
+    CGUnit *unit0 = [[CGUnit alloc] init];
+    unit0.name = @"张辽";
+    unit0.hp = 135;
+    unit0.atk = 120;
+    unit0.def = 90;
+    unit0.belong = 0;
+    unit0.UID = 100;
     
-    CGObject *obj1 = [[CGObject alloc] init];
-    obj1.name = @"乐进";
-    obj1.hp = 160;
-    obj1.atk = 105;
-    obj1.def = 95;
-    obj1.belong = 0;
-    obj1.OID = 101;
+    CGUnit *unit1 = [[CGUnit alloc] init];
+    unit1.name = @"乐进";
+    unit1.hp = 160;
+    unit1.atk = 105;
+    unit1.def = 95;
+    unit1.belong = 0;
+    unit1.UID = 101;
     
-    CGObject *obj2 = [[CGObject alloc] init];
-    obj2.name = @"许褚";
-    obj2.hp = 150;
-    obj2.atk = 130;
-    obj2.def = 88;
-    obj2.belong = 0;
-    obj2.OID = 102;
+    CGUnit *unit2 = [[CGUnit alloc] init];
+    unit2.name = @"许褚";
+    unit2.hp = 150;
+    unit2.atk = 130;
+    unit2.def = 88;
+    unit2.belong = 0;
+    unit2.UID = 102;
     
-    CGObject *obj3 = [[CGObject alloc] init];
-    obj3.name = @"典韦";
-    obj3.hp = 160;
-    obj3.atk = 120;
-    obj3.def = 95;
-    obj3.belong = 0;
-    obj3.OID = 103;
+    CGUnit *unit3 = [[CGUnit alloc] init];
+    unit3.name = @"典韦";
+    unit3.hp = 160;
+    unit3.atk = 120;
+    unit3.def = 95;
+    unit3.belong = 0;
+    unit3.UID = 103;
     
-    CGObject *obj4 = [[CGObject alloc] init];
-    obj4.name = @"徐晃";
-    obj4.hp = 150;
-    obj4.atk = 100;
-    obj4.def = 95;
-    obj4.belong = 0;
-    obj4.OID = 104;
+    CGUnit *unit4 = [[CGUnit alloc] init];
+    unit4.name = @"徐晃";
+    unit4.hp = 150;
+    unit4.atk = 100;
+    unit4.def = 95;
+    unit4.belong = 0;
+    unit4.UID = 104;
     
     ///
-    CGObject *obj10 = [[CGObject alloc] init];
-    obj10.name = @"关羽";
-    obj10.hp = 165;
-    obj10.atk = 128;
-    obj10.def = 95;
-    obj10.belong = 1;
-    obj10.OID = 200;
+    CGUnit *unit10 = [[CGUnit alloc] init];
+    unit10.name = @"关羽";
+    unit10.hp = 165;
+    unit10.atk = 128;
+    unit10.def = 95;
+    unit10.belong = 1;
+    unit10.UID = 200;
     
-    CGObject *obj11 = [[CGObject alloc] init];
-    obj11.name = @"赵云";
-    obj11.hp = 150;
-    obj11.atk = 120;
-    obj11.def = 98;
-    obj11.belong = 1;
-    obj11.OID = 201;
+    CGUnit *unit11 = [[CGUnit alloc] init];
+    unit11.name = @"赵云";
+    unit11.hp = 150;
+    unit11.atk = 120;
+    unit11.def = 98;
+    unit11.belong = 1;
+    unit11.UID = 201;
     
-    CGObject *obj12 = [[CGObject alloc] init];
-    obj12.name = @"张飞";
-    obj12.hp = 140;
-    obj12.atk = 136;
-    obj12.def = 78;
-    obj12.belong = 1;
-    obj12.OID = 202;
+    CGUnit *unit12 = [[CGUnit alloc] init];
+    unit12.name = @"张飞";
+    unit12.hp = 140;
+    unit12.atk = 136;
+    unit12.def = 78;
+    unit12.belong = 1;
+    unit12.UID = 202;
     
-    CGObject *obj13 = [[CGObject alloc] init];
-    obj13.name = @"黄忠";
-    obj13.hp = 120;
-    obj13.atk = 120;
-    obj13.def = 85;
-    obj13.belong = 1;
-    obj13.OID = 203;
+    CGUnit *unit13 = [[CGUnit alloc] init];
+    unit13.name = @"黄忠";
+    unit13.hp = 120;
+    unit13.atk = 120;
+    unit13.def = 85;
+    unit13.belong = 1;
+    unit13.UID = 203;
     
-    CGObject *obj14 = [[CGObject alloc] init];
-    obj14.name = @"诸葛亮";
-    obj14.hp = 80;
-    obj14.atk = 95;
-    obj14.def = 90;
-    obj14.belong = 1;
-    obj14.OID = 204;
+    CGUnit *unit14 = [[CGUnit alloc] init];
+    unit14.name = @"诸葛亮";
+    unit14.hp = 80;
+    unit14.atk = 95;
+    unit14.def = 90;
+    unit14.belong = 1;
+    unit14.UID = 204;
     
-    NSArray *atks = @[obj0, obj1, obj2, obj3, obj4];
-    NSArray *defs = @[obj10, obj11, obj12, obj13, obj14];
+    NSArray *atks = @[unit0, unit1, unit2, unit3, unit4];
+    NSArray *defs = @[unit10, unit11, unit12, unit13, unit14];
     
     CGBattle *b = [[CGBattleManager shared] battleWithAtkers:atks Defers:defs];
     
     b.bBattleStateDidEndBlock = ^(CGBattle *b) {
         NSLog(@"battle state = %ld", b.battleState);
         if (b.battleState == CGBattleStateEnd) {
-            CGBattleOjbsStatusLog *sl = [[CGBattleOjbsStatusLog alloc] initWithObjs:b.world.aliveSet.allObjects];
+            CGBattleOjbsStatusLog *sl = [[CGBattleOjbsStatusLog alloc] initWithUnits:b.world.aliveSet.allObjects];
             NSLog(@"%@", [sl description]);
         }
     };
     __weak CGBattle *__b = b;
     b.bRoundStateDidEndBlock = ^(CGRound *r) {
         if (r.roundState == CGRoundStateSort) {
-            CGBattleSelectActionLog *log = [[CGBattleSelectActionLog alloc] initWithObjs:__b.world.aliveSet.allObjects];
+            CGBattleSelectActionLog *log = [[CGBattleSelectActionLog alloc] initWithUnits:__b.world.aliveSet.allObjects];
 
         }
         else if (r.roundState == CGRoundStateUnitsAction) {
-            CGBattleSortLog *log = [[CGBattleSortLog alloc] initWithObjs:__b.world.aliveSet.allObjects];
+            CGBattleSortLog *log = [[CGBattleSortLog alloc] initWithUnits:__b.world.aliveSet.allObjects];
         }
         
         NSLog(@"round[%d] state = %ld", r.round, r.roundState);

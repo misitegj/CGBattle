@@ -1,30 +1,30 @@
 //
-//  CGBattleObject.h
+//  CGBattleUnit.h
 //  CGBattle
 //
 //  Created by Samuel on 9/20/15.
 //  Copyright (c) 2015 Samuel. All rights reserved.
 //
 
-#import "CGObject.h"
+#import "CGUnit.h"
 #import "CGSkill.h"
 
 typedef enum {
     
-    CGBattleObjectAction,
-    CGBattleObjectDidAction,
-    CGBattleObjectEndAction,
+    CGBattleUnitAction,
+    CGBattleUnitDidAction,
+    CGBattleUnitEndAction,
     
-    CGBattleObjectWillHurt,
-    CGBattleObjectDidHurt,
+    CGBattleUnitWillHurt,
+    CGBattleUnitDidHurt,
     
-} CGBattleObjectState;
+} CGBattleUnitState;
 
 
 
-@interface CGBattleObject : NSObject
+@interface CGBattleUnit : NSObject
 
-@property (nonatomic, weak, readonly) CGObject *origin;
+@property (nonatomic, weak, readonly) CGUnit *origin;
 
 @property (nonatomic, assign) BOOL isActioned;
 @property (nonatomic, assign) int belong; // 我方, 敌方, 友方
@@ -65,16 +65,17 @@ typedef enum {
 @property (nonatomic, assign) int actionSkillID; // 下一步行动的技能ID
 
 
-- (instancetype)initWithCGObject:(CGObject *)obj;
+- (instancetype)initWithUnit:(CGUnit *)unit;
 
 // 选择目标和使用技能
-- (void)AI_calcTargetsWithObjs:(NSMutableSet *)set;
+- (void)AI_calcTargetsWithUnits:(NSMutableSet *)set;
 
 // 输出行动日志
-- (NSMutableArray *)AI_actionLogsWithObjs:(NSMutableSet *)objs;
+- (NSMutableArray *)AI_actionLogsWithUnits:(NSMutableSet *)units;
+
 @end
 
-extern BOOL canTarget(CGBattleObject *src, CGBattleObject *des, CGSkillTargetAvailable tarAva);
-extern CGBattleObject* randomTarget(CGBattleObject *src, id objs, CGSkillTargetAvailable skTarAva);
+extern BOOL canTarget(CGBattleUnit *src, CGBattleUnit *des, CGSkillTargetAvailable tarAva);
+extern CGBattleUnit* randomTarget(CGBattleUnit *src, id units, CGSkillTargetAvailable skTarAva);
 
 

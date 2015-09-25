@@ -7,7 +7,7 @@
 //
 
 #import "CGSkill.h"
-#import "CGBattleObject.h"
+#import "CGBattleUnit.h"
 #import "CGBattleLog.h"
 
 @implementation CGSkillBuff
@@ -91,14 +91,14 @@
 
 @implementation CGSkill(BattleLog)
 
-- (NSMutableArray *)battleLogsWithObjs:(NSMutableSet *)aliveSet
-                                   src:(CGBattleObject *)src
-                                   des:(CGBattleObject *)des
+- (NSMutableArray *)battleLogsWithUnits:(NSMutableSet *)aliveSet
+                                   src:(CGBattleUnit *)src
+                                   des:(CGBattleUnit *)des
 {
-    return [self battleLogsWithObjs:aliveSet srcLoc:src.location desLoc:des.location];
+    return [self battleLogsWithUnits:aliveSet srcLoc:src.location desLoc:des.location];
 }
 
-- (NSMutableArray *)battleLogsWithObjs:(NSMutableSet *)aliveSet
+- (NSMutableArray *)battleLogsWithUnits:(NSMutableSet *)aliveSet
                                 srcLoc:(int)srcLoc
                                 desLoc:(int)desLoc
 {
@@ -106,12 +106,12 @@
     // 普通攻击, 其他子类自己实现
     assert(_SID == CGSkillIdMeleeNormal || _SID == CGSkillIdMeleeHitBackNormal);
     
-    CGBattleObject *originSrc = [self searchObject:aliveSet byLocation:srcLoc];
-    CGBattleObject *originDes = [self searchObject:aliveSet byLocation:desLoc];
+    CGBattleUnit *originSrc = [self searchObject:aliveSet byLocation:srcLoc];
+    CGBattleUnit *originDes = [self searchObject:aliveSet byLocation:desLoc];
     
     
-    CGBattleObject *src = originSrc;
-    CGBattleObject *des = originDes;
+    CGBattleUnit *src = originSrc;
+    CGBattleUnit *des = originDes;
     
     NSMutableArray *logs = [NSMutableArray array];
     
@@ -159,7 +159,7 @@
                 break;
             }
             
-            CGBattleObject *tmp = des;
+            CGBattleUnit *tmp = des;
             des = src;
             src = tmp;
             isHitBack = YES;
@@ -179,15 +179,15 @@
     return logs;
 }
 
-- (BOOL)isHitSrc:(CGBattleObject *)src
-             des:(CGBattleObject *)des
+- (BOOL)isHitSrc:(CGBattleUnit *)src
+             des:(CGBattleUnit *)des
 {
 #warning TODO
     return CGJudgeRandom1to100(90);
 }
 
-- (BOOL)hasHitBackSrc:(CGBattleObject *)src
-                  des:(CGBattleObject *)des
+- (BOOL)hasHitBackSrc:(CGBattleUnit *)src
+                  des:(CGBattleUnit *)des
 {
 #warning TODO
     return CGJudgeRandom1to100(50);
@@ -205,13 +205,13 @@
 }
 
 
-- (CGBattleObject *)searchObject:(NSMutableSet *)objs
+- (CGBattleUnit *)searchObject:(NSMutableSet *)units
                       byLocation:(int)loc
 
 {
-    for (CGBattleObject *obj in objs) {
-        if (obj.location == loc) {
-            return obj;
+    for (CGBattleUnit *unit in units) {
+        if (unit.location == loc) {
+            return unit;
         }
     }
     

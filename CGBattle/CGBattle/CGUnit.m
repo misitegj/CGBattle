@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Samuel. All rights reserved.
 //
 
-#import "CGObject.h"
+#import "CGUnit.h"
 
-@implementation CGObject
+@implementation CGUnit
 
-- (instancetype)initWithCGObject:(CGObject *)obj
+- (instancetype)initWithCGObject:(CGUnit *)unit
 {
     return nil;
 }

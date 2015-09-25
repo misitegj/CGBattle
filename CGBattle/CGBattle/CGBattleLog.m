@@ -7,7 +7,7 @@
 //
 
 #import "CGBattleLog.h"
-#import "CGBattleObject.h"
+#import "CGBattleUnit.h"
 #import <UIKit/UIKit.h>
 
 
@@ -45,7 +45,7 @@
 
 - (NSString *)description
 {
-    CGBattleObject *src = self.src;
+    CGBattleUnit *src = self.src;
     
     assert([self.deses count]>0);
     
@@ -53,7 +53,7 @@
         
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
-        for (CGBattleObject *des in self.deses) {
+        for (CGBattleUnit *des in self.deses) {
             CGSkill *sk = [CGSkill skillWithSID:self.SID];
             
             [mstr appendString:[src.origin.name length]?src.origin.name:@"未知"];
@@ -77,7 +77,7 @@
 }
 
 - (id)initWithSID:(CGSkillID)SID
-              src:(CGBattleObject *)src
+              src:(CGBattleUnit *)src
             deses:(NSMutableArray *)deses
             value:(int)value
 {
@@ -103,7 +103,7 @@
 @implementation CGBattleMeleeMissLog
 
 - (id)initWithSID:(CGSkillID)SID
-              src:(CGBattleObject *)src
+              src:(CGBattleUnit *)src
             deses:(NSMutableArray *)deses
 {
     self = [super init];
@@ -124,7 +124,7 @@
     if (!self.desc) {
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
-        for (CGBattleObject *des in self.deses) {
+        for (CGBattleUnit *des in self.deses) {
             CGSkill *sk = [CGSkill skillWithSID:self.SID];
             
             [mstr appendString:[self.src.origin.name length] ? self.src.origin.name : @"未知"];
@@ -146,7 +146,7 @@
 
 @implementation CGBattleDeadLog
 
-- (id)initWithSrc:(CGBattleObject *)src
+- (id)initWithSrc:(CGBattleUnit *)src
 {
     self = [super init];
     if (self) {
@@ -240,11 +240,11 @@
 @end
 
 @implementation CGBattleOjbsStatusLog
-- (id)initWithObjs:(NSArray *)objs
+- (id)initWithUnits:(NSArray *)units
 {
     self = [super init];
     if (self) {
-        self.deses = objs;
+        self.deses = units;
         [self description];
     }
     return self;
@@ -256,8 +256,8 @@
     if (!self.desc) {
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
-        for (CGBattleObject *obj in self.deses) {
-            [mstr appendFormat:@"%@[%ld]\n", obj.origin.name, (long)obj.hp];
+        for (CGBattleUnit *unit in self.deses) {
+            [mstr appendFormat:@"%@[%ld]\n", unit.origin.name, (long)unit.hp];
         }
         self.desc = mstr;
     }
@@ -267,11 +267,11 @@
 @end
 
 @implementation CGBattleSelectActionLog
-- (id)initWithObjs:(NSArray *)objs
+- (id)initWithUnits:(NSArray *)units
 {
     self = [super init];
     if (self) {
-        self.deses = objs;
+        self.deses = units;
         [self description];
     }
     return self;
@@ -284,9 +284,9 @@
     if (!self.desc) {
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
-        for (CGBattleObject *obj in self.deses) {
-            CGSkill *sk = [CGSkill skillWithSID:obj.actionSkillID];
-            [mstr appendFormat:@"%@[%d] %@ [%d]位 \n", obj.origin.name, obj.location, sk.name, obj.actionTargetLocation];
+        for (CGBattleUnit *unit in self.deses) {
+            CGSkill *sk = [CGSkill skillWithSID:unit.actionSkillID];
+            [mstr appendFormat:@"%@[%d] %@ [%d]位 \n", unit.origin.name, unit.location, sk.name, unit.actionTargetLocation];
         }
         self.desc = mstr;
     }
@@ -297,11 +297,11 @@
 
 
 @implementation CGBattleSortLog
-- (id)initWithObjs:(NSArray *)objs
+- (id)initWithUnits:(NSArray *)units
 {
     self = [super init];
     if (self) {
-        self.deses = objs;
+        self.deses = units;
         [self description];
     }
     return self;
@@ -314,8 +314,8 @@
     if (!self.desc) {
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
-        for (CGBattleObject *obj in self.deses) {
-            [mstr appendFormat:@"%@ 第[%d]出手 \n", obj.origin.name, obj.actionOrder];
+        for (CGBattleUnit *unit in self.deses) {
+            [mstr appendFormat:@"%@ 第[%d]出手 \n", unit.origin.name, unit.actionOrder];
         }
         self.desc = mstr;
     }

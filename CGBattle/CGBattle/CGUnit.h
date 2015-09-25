@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CGObject : NSObject
+@interface CGUnit : NSObject
 
-@property (nonatomic, assign) int OID;
+@property (nonatomic, assign) int UID;
 @property (nonatomic, strong) NSString *originName; // 初始名
 @property (nonatomic, strong) NSString *name; // 名字
 @property (nonatomic, assign) int charm; // 魅力
@@ -78,14 +78,14 @@
 
 
 // 宠物
-@interface CGPet : CGObject
+@interface CGPet : CGUnit
 @property (nonatomic, assign) int loyalty; // 忠诚度
 
 
 @end
 
 
-@interface CGEnemy : CGObject
+@interface CGEnemy : CGUnit
 @property (nonatomic, strong) NSArray *rootItems; // 掉落物品, 敌方only
 @end
 

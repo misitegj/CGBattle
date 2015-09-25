@@ -7,9 +7,9 @@
 //
 
 #import "CGBattleManager.h"
-#import "CGObject.h"
+#import "CGUnit.h"
 #import "CG.h"
-#import "CGBattleObject.h"
+#import "CGBattleUnit.h"
 #import "CGBattleLog.h"
 
 @interface CGBattleManager() {

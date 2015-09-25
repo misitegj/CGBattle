@@ -69,15 +69,15 @@ typedef NS_ENUM(NSUInteger, CGSkillBuffType) {
 @end
 
 
-@class CGObject, CGBattleObject;
+@class CGUnit, CGBattleUnit;
 
 @interface CGSkill(BattleLog)
 // 计算战斗日志
-- (NSMutableArray *)battleLogsWithObjs:(NSMutableSet *)objs
-                                   src:(CGBattleObject *)src
-                                   des:(CGBattleObject *)des;
+- (NSMutableArray *)battleLogsWithUnits:(NSMutableSet *)units
+                                   src:(CGBattleUnit *)src
+                                   des:(CGBattleUnit *)des;
 
-- (NSMutableArray *)battleLogsWithObjs:(NSMutableSet *)objs
+- (NSMutableArray *)battleLogsWithUnits:(NSMutableSet *)units
                                 srcLoc:(int)srcLoc
                                 desLoc:(int)desLoc;
 

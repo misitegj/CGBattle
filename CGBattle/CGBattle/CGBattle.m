@@ -8,7 +8,7 @@
 
 #import "CGBattle.h"
 #import "CGRound.h"
-#import "CGBattleObject.h"
+#import "CGBattleUnit.h"
 
 @implementation CGBattle
 
@@ -152,7 +152,7 @@
 }
 
 /*
- 先做一步转换 CGObject -> CGBattleObject
+ 先做一步转换 CGObject -> CGBattleUnit
  */
 
 - (void)battleBegin

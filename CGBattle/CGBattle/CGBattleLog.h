@@ -13,7 +13,7 @@
 
 @property (nonatomic, assign) CGSkillID SID;
 
-@property (nonatomic, strong) CGBattleObject *src; // 攻击单位
+@property (nonatomic, strong) CGBattleUnit *src; // 攻击单位
 @property (nonatomic, strong) NSArray *deses; // 受作用的所有单位
 
 @property (nonatomic, assign) int value; // 作用的数值
@@ -28,7 +28,7 @@
 @interface CGBattleMeleeLog : CGBattleLog
 
 - (id)initWithSID:(CGSkillID)SID
-              src:(CGBattleObject *)src
+              src:(CGBattleUnit *)src
             deses:(NSMutableArray *)deses
             value:(int)value;
 
@@ -40,12 +40,12 @@
 
 @interface CGBattleMeleeMissLog : CGBattleLog
 - (id)initWithSID:(CGSkillID)SID
-              src:(CGBattleObject *)src
+              src:(CGBattleUnit *)src
             deses:(NSMutableArray *)deses;
 @end
 
 @interface CGBattleDeadLog : CGBattleLog
-- (id)initWithSrc:(CGBattleObject *)src;
+- (id)initWithSrc:(CGBattleUnit *)src;
 @end
 
 @interface CGBattleRoundBeginLog : CGBattleLog
@@ -63,15 +63,15 @@
 @end
 
 @interface CGBattleOjbsStatusLog : CGBattleLog
-- (id)initWithObjs:(NSArray *)objs;
+- (id)initWithUnits:(NSArray *)units;
 @end
 
 @interface CGBattleSelectActionLog : CGBattleLog
-- (id)initWithObjs:(NSArray *)objs;
+- (id)initWithUnits:(NSArray *)units;
 @end
 
 @interface CGBattleSortLog : CGBattleLog
-- (id)initWithObjs:(NSArray *)objs;
+- (id)initWithUnits:(NSArray *)units;
 @end
 
 // src 对 des 使用 sid, 造成 value 物理/魔法伤害

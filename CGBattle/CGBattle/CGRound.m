@@ -8,7 +8,7 @@
 
 #import "CGRound.h"
 #import "CGBattleWorld.h"
-#import "CGBattleObject.h"
+#import "CGBattleUnit.h"
 #import "CGBattle.h"
 
 @interface CGRound(){
@@ -41,7 +41,7 @@
  8,9      9,8
  
  步骤
- 0, 新回合, 每个obj都选择了技能和对象
+ 0, 新回合, 每个unit都选择了技能和对象
  1, 判断是否乱敏
  2, 按照敏捷排序, 或者随机排序
  3, 循环当前行动者, 行动者的攻击对象是否存活?攻击:随机选一个攻击
@@ -131,8 +131,8 @@
 
 - (void)roundBegin:(int)round
 {
-    for (CGBattleObject *obj in _world.aliveSet) {
-        obj.isActioned = NO;
+    for (CGBattleUnit *unit in _world.aliveSet) {
+        unit.isActioned = NO;
     }
 }
 
@@ -144,8 +144,8 @@
 - (void)roundAISelectAction:(int)round
 {
     // 所有对象 选择完技能和对象
-    for (CGBattleObject *obj in _world.aliveSet) {
-        [obj AI_calcTargetsWithObjs:_world.aliveSet];
+    for (CGBattleUnit *unit in _world.aliveSet) {
+        [unit AI_calcTargetsWithUnits:_world.aliveSet];
     }
 }
 
@@ -160,13 +160,13 @@
     NSMutableArray *logs = [NSMutableArray array];
     
     // 计算人物行动
-    for (CGBattleObject *obj in _sortedUnits) {
+    for (CGBattleUnit *unit in _sortedUnits) {
         if ([_world isOneTeamAllDead]) {// 每一个人行动结束, 都要判断是否结束
             break;
         }
         
-        if ([self objCanAction:obj]) {
-            NSArray *l = [obj AI_actionLogsWithObjs:_world.aliveSet];
+        if ([self unitCanAction:unit]) {
+            NSArray *l = [unit AI_actionLogsWithUnits:_world.aliveSet];
             [logs addObjectsFromArray:l];
         }
         else {
@@ -218,23 +218,23 @@
     
     int i = 0;
     do{
-        CGBattleObject *obj = [set anyObject];
-        obj.actionOrder = i++;
-        [set removeObject:obj];
-        [arr addObject:obj];
+        CGBattleUnit *unit = [set anyObject];
+        unit.actionOrder = i++;
+        [set removeObject:unit];
+        [arr addObject:unit];
         
     }while ([set count]>0);
     
     return arr;
 }
 
-typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
+typedef NSComparisonResult (^NSComparator)(id unit1, id unit2);
 
 - (NSMutableArray *)sortUnitsByAgi:(NSMutableSet *)aliveSet
 {
     assert([aliveSet count]>0);
     
-    NSArray *result = [aliveSet.allObjects sortedArrayUsingComparator:^NSComparisonResult(CGBattleObject *o1, CGBattleObject *o2){
+    NSArray *result = [aliveSet.allObjects sortedArrayUsingComparator:^NSComparisonResult(CGBattleUnit *o1, CGBattleUnit *o2){
         
         if (o1.agi==o2.agi) {
             return CGRandom(2);
@@ -243,24 +243,24 @@ typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
     }];
     
     for (int i=0; i<[result count]; i++) {
-        CGBattleObject *obj = [result objectAtIndex:i];
-        obj.actionOrder = i;
+        CGBattleUnit *unit = [result objectAtIndex:i];
+        unit.actionOrder = i;
     }
     
     return [result mutableCopy];
 }
 
-- (NSMutableArray *)ojbsByActionOrder:(NSMutableArray *)objs
+- (NSMutableArray *)ojbsByActionOrder:(NSMutableArray *)units
 {
-    assert([objs count]>0);
+    assert([units count]>0);
     
-    NSArray *result = [objs sortedArrayUsingComparator:^NSComparisonResult(CGBattleObject *o1, CGBattleObject *o2){
+    NSArray *result = [units sortedArrayUsingComparator:^NSComparisonResult(CGBattleUnit *o1, CGBattleUnit *o2){
         return o1.actionOrder < o2.actionOrder;
     }];
     
     for (int i=0; i<[result count]; i++) {
-        CGBattleObject *obj = [result objectAtIndex:i];
-        obj.actionOrder = i;
+        CGBattleUnit *unit = [result objectAtIndex:i];
+        unit.actionOrder = i;
     }
     
     return [result mutableCopy];
@@ -271,11 +271,11 @@ typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
     // 计算或者和死亡的列表
     NSMutableSet *tmpSet = [NSMutableSet set];
     
-    for (CGBattleObject *obj in _world.aliveSet) {
-        if (!obj.isAlive || obj.hp<=0) {
-            obj.isAlive = NO;
-            obj.hp = 0;
-            [tmpSet addObject:obj];
+    for (CGBattleUnit *unit in _world.aliveSet) {
+        if (!unit.isAlive || unit.hp<=0) {
+            unit.isAlive = NO;
+            unit.hp = 0;
+            [tmpSet addObject:unit];
         }
     }
     
@@ -283,9 +283,9 @@ typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
     [_world.deadSet unionSet:tmpSet];
 }
 
-- (BOOL)objCanAction:(CGBattleObject *)obj
+- (BOOL)unitCanAction:(CGBattleUnit *)unit
 {
-    return obj.isAlive && !obj.isActioned;
+    return unit.isAlive && !unit.isActioned;
 }
 
 

@@ -7,7 +7,7 @@
 //
 
 #import "CGBattleWorld.h"
-#import "CGBattleObject.h"
+#import "CGBattleUnit.h"
 #import "CGBattle.h"
 
 
@@ -48,13 +48,13 @@
     _deadSet = [[NSMutableSet alloc] init];
     
     for (int i=0; i<[_atksOrigin count]; i++) {
-        CGBattleObject *b = [[CGBattleObject alloc] initWithCGObject:_atksOrigin[i]];
+        CGBattleUnit *b = [[CGBattleUnit alloc] initWithUnit:_atksOrigin[i]];
         b.location = i;
         [_aliveSet addObject:b];
     }
     
     for (int i=0; i<[_defsOrigin count]; i++) {
-        CGBattleObject *b = [[CGBattleObject alloc] initWithCGObject:_defsOrigin[i]];
+        CGBattleUnit *b = [[CGBattleUnit alloc] initWithUnit:_defsOrigin[i]];
         b.location = kTeamBLocationOffset + i;
         [_aliveSet addObject:b];
     }
@@ -88,7 +88,7 @@
 - (int)aliveCountWithTeamType:(CGBattleTeamType)type
 {
     int count = 0;
-    for (CGBattleObject *o in _aliveSet) {
+    for (CGBattleUnit *o in _aliveSet) {
         if (o.belong == type) {
             count++;
         }
