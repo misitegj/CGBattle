@@ -19,14 +19,14 @@ typedef enum : NSUInteger {
     
 } CGRoundState;
 
-@class CGBattleWorld, CGRound;
+@class CGWorld, CGRound;
 
 typedef void (^bRoundStateBlock)(CGRound *r);
 
 
 @interface CGRound : NSObject {
     CGRoundState _roundState;
-    CGBattleWorld *_world;
+    CGWorld *_world;
     int _round;
 }
 
@@ -37,7 +37,7 @@ typedef void (^bRoundStateBlock)(CGRound *r);
 @property (nonatomic, strong) bRoundStateBlock bRoundStateDidBeginBlock;
 @property (nonatomic, strong) bRoundStateBlock bRoundStateDidEndBlock;
 
-- (instancetype)initWithWorld:(CGBattleWorld *)world
+- (instancetype)initWithWorld:(CGWorld *)world
                         round:(int)round;
 
 - (BOOL)canRun;

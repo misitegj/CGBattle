@@ -16,13 +16,13 @@
 - (instancetype)initWithAtks:(NSArray *)atks
                         defs:(NSArray *)defs
 {
-    CGBattleWorld *world = [[CGBattleWorld alloc] initWithAtks:atks defs:defs];
+    CGWorld *world = [[CGWorld alloc] initWithAtks:atks defs:defs];
     self = [self initWithBattleWorld:world];
     return self;
 }
 
 
-- (instancetype)initWithBattleWorld:(CGBattleWorld *)world
+- (instancetype)initWithBattleWorld:(CGWorld *)world
 {
     self = [super init];
     if (self) {

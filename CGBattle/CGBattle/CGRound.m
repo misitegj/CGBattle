@@ -7,7 +7,7 @@
 //
 
 #import "CGRound.h"
-#import "CGBattleWorld.h"
+#import "CGWorld.h"
 #import "CGBattleUnit.h"
 #import "CGBattle.h"
 
@@ -20,7 +20,7 @@
 
 @implementation CGRound
 
-- (instancetype)initWithWorld:(CGBattleWorld *)world
+- (instancetype)initWithWorld:(CGWorld *)world
                         round:(int)round
 {
     self = [super init];

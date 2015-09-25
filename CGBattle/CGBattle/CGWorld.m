@@ -6,25 +6,25 @@
 //  Copyright (c) 2015 Samuel. All rights reserved.
 //
 
-#import "CGBattleWorld.h"
+#import "CGWorld.h"
 #import "CGBattleUnit.h"
 #import "CGBattle.h"
 
 
-@interface CGBattleWorld()
+@interface CGWorld()
 
 @property (nonatomic, strong) NSMutableArray *atksOrigin;    // 初始攻击方, CGObject
 @property (nonatomic, strong) NSMutableArray *defsOrigin;    // 初始防御方
 
 @end
 
-@implementation CGBattleWorld
+@implementation CGWorld
 
 
 + (instancetype)battleWorldWithAtks:(NSArray *)atks
                                defs:(NSArray *)defs
 {
-    CGBattleWorld *world = [[CGBattleWorld alloc] initWithAtks:atks
+    CGWorld *world = [[CGWorld alloc] initWithAtks:atks
                                                           defs:defs];
     return world;
 }

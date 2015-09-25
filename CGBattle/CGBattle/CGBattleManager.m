@@ -38,7 +38,7 @@ static CGBattleManager *_instance = nil;
 - (CGBattle *)battleWithAtkers:(NSArray *)atkers
                         Defers:(NSArray *)defers
 {
-    CGBattleWorld *world = [[CGBattleWorld alloc] initWithAtks:atkers defs:defers];
+    CGWorld *world = [[CGWorld alloc] initWithAtks:atkers defs:defers];
     CGBattle *battle = [[CGBattle alloc] initWithBattleWorld:world];
     
     return battle;

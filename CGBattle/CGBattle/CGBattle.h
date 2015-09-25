@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CGBattleWorld.h"
+#import "CGWorld.h"
 #import "CGRound.h"
 
 typedef enum : NSUInteger {
@@ -31,13 +31,13 @@ typedef void (^bBattleStateBlock)(CGBattle *b);
 
 @interface CGBattle : NSObject {
     CGBattleState _battleState;
-    CGBattleWorld *_world;
+    CGWorld *_world;
     NSMutableArray *_rounds;
     int _round;
 }
 
 @property (nonatomic, assign) CGBattleState battleState;
-@property (nonatomic, strong, readonly) CGBattleWorld *world;
+@property (nonatomic, strong, readonly) CGWorld *world;
 @property (nonatomic, strong) NSArray *logs; // battle log
 
 @property (nonatomic, strong) bBattleStateBlock bBattleStateDidBeginBlock;
@@ -49,7 +49,7 @@ typedef void (^bBattleStateBlock)(CGBattle *b);
 
 - (instancetype)initWithAtks:(NSArray *)atks defs:(NSArray *)defs;
 
-- (instancetype)initWithBattleWorld:(CGBattleWorld *)world;
+- (instancetype)initWithBattleWorld:(CGWorld *)world;
 
 - (BOOL)canFire; // 是否可以开战
 - (BOOL)fire; // 开战

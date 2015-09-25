@@ -10,7 +10,7 @@
 
 #define kTeamBLocationOffset 10
 
-@interface CGBattleWorld : NSObject
+@interface CGWorld : NSObject
 
 @property (nonatomic, strong) NSMutableSet *aliveSet;        // 存活单位集合 CGBattleUnit
 @property (nonatomic, strong) NSMutableSet *deadSet;         // 死亡单位集合
