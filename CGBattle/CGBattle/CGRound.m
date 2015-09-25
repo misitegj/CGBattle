@@ -101,10 +101,16 @@
                 break;
         }
         
+        
         if (_roundState != nextState) {
+            if (self.bRoundStateDidEndBlock) {
+                self.bRoundStateDidEndBlock(self);
+            }
+            
             _roundState = nextState;
-            if (self.bRoundDidChangeBlock) {
-                self.bRoundDidChangeBlock(self);
+            
+            if (self.bRoundStateDidBeginBlock) {
+                self.bRoundStateDidBeginBlock(self);
             }
         }
     }

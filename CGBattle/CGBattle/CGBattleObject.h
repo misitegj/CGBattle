@@ -9,6 +9,19 @@
 #import "CGObject.h"
 #import "CGSkill.h"
 
+typedef enum {
+    
+    CGBattleObjectAction,
+    CGBattleObjectDidAction,
+    CGBattleObjectEndAction,
+    
+    CGBattleObjectWillHurt,
+    CGBattleObjectDidHurt,
+    
+} CGBattleObjectState;
+
+
+
 @interface CGBattleObject : NSObject
 
 @property (nonatomic, weak, readonly) CGObject *origin;

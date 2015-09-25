@@ -110,7 +110,7 @@
     
     CGBattle *b = [[CGBattleManager shared] battleWithAtkers:atks Defers:defs];
     
-    b.bBattleStateDidChangeBlock = ^(CGBattle *b) {
+    b.bBattleStateDidEndBlock = ^(CGBattle *b) {
         NSLog(@"battle state = %ld", b.battleState);
         if (b.battleState == CGBattleStateEnd) {
             CGBattleOjbsStatusLog *sl = [[CGBattleOjbsStatusLog alloc] initWithObjs:b.world.aliveSet.allObjects];
@@ -118,7 +118,7 @@
         }
     };
     __weak CGBattle *__b = b;
-    b.bRoundStateDidChangeBlock = ^(CGRound *r) {
+    b.bRoundStateDidEndBlock = ^(CGRound *r) {
         if (r.roundState == CGRoundStateSort) {
             CGBattleSelectActionLog *log = [[CGBattleSelectActionLog alloc] initWithObjs:__b.world.aliveSet.allObjects];
 

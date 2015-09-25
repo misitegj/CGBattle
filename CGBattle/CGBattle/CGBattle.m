@@ -98,8 +98,9 @@
                 _round = 0;
                 do{
                     CGRound *r = [[CGRound alloc] initWithWorld:_world round:_round];
-                    r.bRoundDidChangeBlock = self.bRoundStateDidChangeBlock;
-                    
+                    r.bRoundStateDidBeginBlock = self.bRoundStateDidBeginBlock;
+                    r.bRoundStateDidEndBlock = self.bRoundStateDidEndBlock;
+
                     if (![r canRun]) {
                         continue;
                     }
@@ -124,10 +125,14 @@
         }
         
         if (_battleState != nextState) {
+            if (self.bBattleStateDidEndBlock) {
+                self.bBattleStateDidEndBlock(self);
+            }
+            
             _battleState = nextState;
             
-            if (self.bBattleStateDidChangeBlock) {
-                self.bBattleStateDidChangeBlock(self);
+            if (self.bBattleStateDidBeginBlock) {
+                self.bBattleStateDidBeginBlock(self);
             }
         }
     }

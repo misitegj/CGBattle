@@ -27,7 +27,7 @@ typedef enum : NSUInteger {
 
 @class CGBattle;
 
-typedef void (^bBattleStateDidChangedBlock)(CGBattle *b);
+typedef void (^bBattleStateBlock)(CGBattle *b);
 
 @interface CGBattle : NSObject {
     CGBattleState _battleState;
@@ -38,10 +38,14 @@ typedef void (^bBattleStateDidChangedBlock)(CGBattle *b);
 
 @property (nonatomic, assign) CGBattleState battleState;
 @property (nonatomic, strong, readonly) CGBattleWorld *world;
-@property (nonatomic, strong) NSArray *logs; // 战斗日志
+@property (nonatomic, strong) NSArray *logs; // battle log
 
-@property (nonatomic, strong) bBattleStateDidChangedBlock bBattleStateDidChangeBlock;
-@property (nonatomic, strong) bRoundStateDidChangedBlock bRoundStateDidChangeBlock;
+@property (nonatomic, strong) bBattleStateBlock bBattleStateDidBeginBlock;
+@property (nonatomic, strong) bBattleStateBlock bBattleStateDidEndBlock;
+
+@property (nonatomic, strong) bRoundStateBlock bRoundStateDidBeginBlock;
+@property (nonatomic, strong) bRoundStateBlock bRoundStateDidEndBlock;
+
 
 - (instancetype)initWithAtks:(NSArray *)atks defs:(NSArray *)defs;
 

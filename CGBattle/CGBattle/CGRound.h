@@ -21,7 +21,7 @@ typedef enum : NSUInteger {
 
 @class CGBattleWorld, CGRound;
 
-typedef void (^bRoundStateDidChangedBlock)(CGRound *r);
+typedef void (^bRoundStateBlock)(CGRound *r);
 
 
 @interface CGRound : NSObject {
@@ -33,7 +33,9 @@ typedef void (^bRoundStateDidChangedBlock)(CGRound *r);
 @property (nonatomic, assign, readonly) int round;
 @property (nonatomic, assign, readonly) CGRoundState roundState;
 @property (nonatomic, strong, readonly) NSArray *logs; // 战斗日志
-@property (nonatomic, strong) bRoundStateDidChangedBlock bRoundDidChangeBlock;
+
+@property (nonatomic, strong) bRoundStateBlock bRoundStateDidBeginBlock;
+@property (nonatomic, strong) bRoundStateBlock bRoundStateDidEndBlock;
 
 - (instancetype)initWithWorld:(CGBattleWorld *)world
                         round:(int)round;
