@@ -56,10 +56,10 @@
         for (CGBattleUnit *des in self.deses) {
             CGSkill *sk = [CGSkill skillWithSID:self.SID];
             
-            [mstr appendString:[src.origin.name length]?src.origin.name:@"未知"];
+            [mstr appendString:[src.name length]?src.name:@"未知"];
             [mstr appendFormat:@"[%d]", src.hp];
             [mstr appendString:@" 对 "];
-            [mstr appendString:[des.origin.name length]?des.origin.name:@"未知"];
+            [mstr appendString:[des.name length]?des.name:@"未知"];
             [mstr appendFormat:@"[%d]", des.hp];
             [mstr appendString:@" 使用 "];
             [mstr appendString:sk.name];
@@ -78,7 +78,7 @@
 
 - (id)initWithSID:(CGSkillID)SID
               src:(CGBattleUnit *)src
-            deses:(NSMutableArray *)deses
+            deses:(NSArray *)deses
             value:(int)value
 {
     self = [super init];
@@ -104,7 +104,7 @@
 
 - (id)initWithSID:(CGSkillID)SID
               src:(CGBattleUnit *)src
-            deses:(NSMutableArray *)deses
+            deses:(NSArray *)deses
 {
     self = [super init];
     if (self) {
@@ -127,11 +127,11 @@
         for (CGBattleUnit *des in self.deses) {
             CGSkill *sk = [CGSkill skillWithSID:self.SID];
             
-            [mstr appendString:[self.src.origin.name length] ? self.src.origin.name : @"未知"];
+            [mstr appendString:[self.src.name length] ? self.src.name : @"未知"];
             [mstr appendFormat:@"[%d]", self.src.hp];
             [mstr appendFormat:@"的 "];
             [mstr appendFormat:@"%@ 被 ", sk.name];
-            [mstr appendString:[des.origin.name length] ? des.origin.name : @"未知"];
+            [mstr appendString:[des.name length] ? des.name : @"未知"];
             [mstr appendFormat:@"[%d]", des.hp];
             [mstr appendString:@" 闪避了 "];
             [mstr appendString:@"\n"];
@@ -158,7 +158,7 @@
 - (NSString *)description
 {
     if (!self.desc) {
-        self.desc = [NSString stringWithFormat:@"%@ 倒下了!", self.src.origin.name];
+        self.desc = [NSString stringWithFormat:@"%@ 倒下了!", self.src.name];
     }
     return self.desc;
 }
@@ -257,7 +257,7 @@
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
         for (CGBattleUnit *unit in self.deses) {
-            [mstr appendFormat:@"%@[%ld]\n", unit.origin.name, (long)unit.hp];
+            [mstr appendFormat:@"%@[%ld]\n", unit.name, (long)unit.hp];
         }
         self.desc = mstr;
     }

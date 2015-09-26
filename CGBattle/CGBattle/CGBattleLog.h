@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "CGSkill.h"
+#import "CGBattleUnit.h"
 
 @interface CGBattleLog : NSObject
 
 @property (nonatomic, assign) CGSkillID SID;
 
 @property (nonatomic, strong) CGBattleUnit *src; // 攻击单位
+@property (nonatomic, strong) CGBattleUnit *des; // 
 @property (nonatomic, strong) NSArray *deses; // 受作用的所有单位
 
 @property (nonatomic, assign) int value; // 作用的数值
@@ -28,19 +30,19 @@
 
 - (id)initWithSID:(CGSkillID)SID
               src:(CGBattleUnit *)src
-            deses:(NSMutableArray *)deses
+            deses:(NSArray *)deses
             value:(int)value;
 
 @end
 
-@interface CGBattleMeleeHitBackLog : CGBattleLog
+@interface CGBattleMeleeHitBackLog : CGBattleMeleeLog
 
 @end
 
 @interface CGBattleMeleeMissLog : CGBattleLog
 - (id)initWithSID:(CGSkillID)SID
               src:(CGBattleUnit *)src
-            deses:(NSMutableArray *)deses;
+            deses:(NSArray *)deses;
 @end
 
 @interface CGBattleDeadLog : CGBattleLog

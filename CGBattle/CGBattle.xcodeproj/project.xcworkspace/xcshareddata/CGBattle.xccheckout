@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4919D1B3-0852-46C2-98DC-77058B412B38</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CGBattle</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>814411B4DDA401BA6A7F650A1E67E16CEDB281E3</key>
+		<string>https://github.com/misitegj/CGBattle.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CGBattle/CGBattle.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>814411B4DDA401BA6A7F650A1E67E16CEDB281E3</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/misitegj/CGBattle.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>814411B4DDA401BA6A7F650A1E67E16CEDB281E3</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>814411B4DDA401BA6A7F650A1E67E16CEDB281E3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CGBattle</string>
+		</dict>
+	</array>
+</dict>
+</plist>

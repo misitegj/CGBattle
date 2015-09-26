@@ -11,7 +11,7 @@
 #import "CGBattleLog.h"
 #import "CGWorld.h"
 
-@implementation CGSkillBuff
+@implementation CGSkillBuffParam
 
 - (id)init
 {
@@ -29,20 +29,36 @@
 @end
 
 
-@interface CGSkill()
+@interface CGSkill() {
+
+}
+
 - (CGSkill *)initWithSID:(CGSkillID)SID;
+
+// 是否命中
+- (BOOL)isHitSrc:(CGBattleUnit *)src
+             des:(CGBattleUnit *)des;
+
+// 伤害系数 90%~110%
+- (float)damageK;
+
+// 是否可以反击
+- (BOOL)hasHitBack:(CGBattleUnit *)util;
+
+// 反击是否触发概率
+- (BOOL)isHitBackTrigger:(CGBattleUnit *)src;
+
 @end
 
 @implementation CGSkill
 
 + (CGSkill *)skillWithSID:(CGSkillID)SID
 {
-#warning TODO new skills
     if (SID == CGSkillIdMeleeHitBackNormal) {
-        return [CGSkill skillMeleeHitBackNormal];
+        return [CGSkillMeleeHitBackNormal new];
     }
     else if (SID == CGSkillIdMeleeQiankun) {
-        
+        return [CGSkillMeleeQianKun new];
     }
     else if (SID == CGSkillIdMeleeZhuren) {
         
@@ -51,29 +67,9 @@
         
     }
     
-    return [CGSkill skillMeleeNormal];
+    return [CGSkillMeleeNormal new];
 }
 
-// 普通物理攻击
-+ (CGSkill *)skillMeleeNormal
-{
-    CGSkill *sk = [[CGSkill alloc] initWithSID:CGSkillIdMeleeNormal];
-#warning AI 不会攻击友方, 如果手动的话 可以
-    sk.targetAvailable = CGSkillTargetAvailableEnemy;
-    sk.effArea = CGSkillEffect1;
-    sk.name = @"普通攻击";
-    return sk;
-}
-
-+ (CGSkill *)skillMeleeHitBackNormal
-{
-    CGSkill *sk = [[CGSkill alloc] initWithSID:CGSkillIdMeleeHitBackNormal];
-    sk.targetAvailable = CGSkillTargetAvailableFriend | CGSkillTargetAvailableEnemy; // 反击可能反击友方
-    sk.effArea = CGSkillEffect1;
-    sk.name = @"反击";
-    
-    return sk;
-}
 
 - (CGSkill *)initWithSID:(CGSkillID)SID
 {
@@ -82,141 +78,369 @@
         _SID = SID;
         _duration = 1;
         _hitRate = 1;
+        _level = 1;
     }
     
     return self;
 }
 
+- (NSArray *)castBySrc:(CGBattleUnit *)src
+                 toDes:(CGBattleUnit *)des
+{
+    assert(0); // 子类实现
+    
+    return @[];
+}
+
+# pragma mark -
+
+- (BOOL)canDoMeleeDamageBySrc:(CGBattleUnit *)src
+                        toDes:(CGBattleUnit *)des
+{
+    for (id b in des.buffs) {
+#warning TODO  无效或反弹
+    }
+    
+    return YES;
+}
+
+- (NSArray *)doMeleeFailedDamageBySrc:(CGBattleUnit *)src
+                                toDes:(CGBattleUnit *)des
+                               damage:(int)damage
+{
+    CGSkillID SID = CGSkillIdMeleeNormal;
+    for (id b in des.buffs) {
+#warning TODO  无效或反弹
+    }
+    
+    return @[];
+}
+
+
+- (BOOL)canDoMagicDamageBySrc:(CGBattleUnit *)src
+                        toDes:(CGBattleUnit *)des
+{
+    for (id b in des.buffs) {
+#warning TODO  无效或反弹
+    }
+    
+    return YES;
+}
+
+- (NSArray *)doMagicFailedDamageBySrc:(CGBattleUnit *)src
+                                toDes:(CGBattleUnit *)des
+                               damage:(int)damage
+{
+    CGSkillID SID = CGSkillIdMeleeNormal;
+    for (id b in des.buffs) {
+#warning TODO  无效或反弹
+    }
+    
+    return @[];
+}
+
+
+# pragma mark -
+
+// 是否命中
+- (BOOL)isHitSrc:(CGBattleUnit *)src
+             des:(CGBattleUnit *)des
+{
+#warning TODO 缺命中率公式
+    return CGJudgeRandom1to100(90);
+}
+
+// 伤害系数 90%~110%
+- (float)damageK
+{
+    return (CGRandom(20) + 90) / 100.f;
+}
+
+// 是否可以反击
+- (BOOL)hasHitBack:(CGBattleUnit *)util
+{
+    return [util canMeleeHitBack] && [self isHitBackTrigger:util];
+}
+
+// 反击是否触发概率
+- (BOOL)isHitBackTrigger:(CGBattleUnit *)src
+{
+#warning TODO 缺反击触发概率
+    return CGJudgeRandom1to100(30);
+}
+
+
+
+- (int)damageByAtk:(int)atk
+               def:(int)def
+                 k:(float)k
+{
+    int damage = (atk - def) * k;
+    damage = MAX(1, damage);
+
+    return damage;
+}
+
 @end
 
 
-@implementation CGSkill(BattleLog)
+# pragma mark - 普通攻击
 
-- (NSMutableArray *)battleLogsWithUnits:(NSMutableSet *)aliveSet
-                                   src:(CGBattleUnit *)src
-                                   des:(CGBattleUnit *)des
+@implementation CGSkillMeleeNormal
+
+- (instancetype)init
 {
-    return [self battleLogsWithUnits:aliveSet srcLoc:src.location desLoc:des.location];
+    self = [super initWithSID:CGSkillIdMeleeNormal];
+    if (self) {
+        self.targetAvailable = CGSkillTargetAvailableEnemy;
+        self.menualTargetAvailable = CGSkillTargetAvailableEnemy | CGSkillTargetAvailableFriend;
+        self.effArea = CGSkillEffect1;
+        self.name = @"普通攻击";
+    }
+    return self;
 }
 
-- (NSMutableArray *)battleLogsWithUnits:(NSMutableSet *)aliveSet
-                                srcLoc:(int)srcLoc
-                                desLoc:(int)desLoc
+
+- (NSArray *)castBySrc:(CGBattleUnit *)src
+                 toDes:(CGBattleUnit *)des
 {
-    
-    // 普通攻击, 其他子类自己实现
-    assert(_SID == CGSkillIdMeleeNormal || _SID == CGSkillIdMeleeHitBackNormal);
-    
-    CGBattleUnit *originSrc = [self searchObject:aliveSet byLocation:srcLoc];
-    CGBattleUnit *originDes = [self searchObject:aliveSet byLocation:desLoc];
-    
-    
-    CGBattleUnit *src = originSrc;
-    CGBattleUnit *des = originDes;
-    
     NSMutableArray *logs = [NSMutableArray array];
     
-    if (src==nil) {
-        assert(0);
-        return logs;
+    NSArray *l = [self _castBySrc:src toDes:des];
+    [logs addObjectsFromArray:l];
+    
+    // 是否有反击
+    if (des.isAlive && [self hasHitBack:des]) {
+        CGSkill *sk = [CGSkill skillWithSID:CGSkillIdMeleeHitBackNormal];
+        NSArray *l = [sk castBySrc:des toDes:src];
+        [logs addObjectsFromArray:l];
     }
-    
-    if (!des.isAlive || des==nil) {
-        des = randomTarget(src, aliveSet, self.targetAvailable);
-    }
-    
-    assert(des);
-    
-    // 攻击
-    BOOL isHitBack = NO;
-    CGBattleMeleeLog *log = nil;
-    
-    do {
-        BOOL isHit = [self isHitSrc:src des:des];
-        
-        if (isHit) {
-            CGSkillID SID = isHitBack ? CGSkillIdMeleeHitBackNormal : CGSkillIdMeleeNormal;
-            float k = isHitBack ? [self damageHitBackK] : [self damageK];
-            int value = (src.atk - des.def) * k;
-            value = MAX(1, value);
-            NSMutableArray *deses = [NSMutableArray arrayWithObject:des];
-            log = [[CGBattleMeleeLog alloc] initWithSID:SID
-                                                    src:src
-                                                  deses:deses
-                                                  value:value];
-            [logs addObject:log];
-            
-            des.hp -= value;
-            if (des.hp <= 0) {// 是否死亡
-                des.hp = 0;
-                des.isAlive = NO;
-                
-                CGBattleDeadLog *log = [[CGBattleDeadLog alloc] initWithSrc:des];
-                [logs addObject:log];
-                
-                if (isHitBack) {
-                    
-                }
-                break;
-            }
-            
-            CGBattleUnit *tmp = des;
-            des = src;
-            src = tmp;
-            isHitBack = YES;
-        }
-        else {
-            // miss 没有伤害值
-            CGSkillID SID = isHitBack ? CGSkillIdMeleeHitBackNormal : CGSkillIdMeleeNormal;
-
-            CGBattleMeleeMissLog *log = [[CGBattleMeleeMissLog alloc] initWithSID:SID src:src deses:[NSMutableArray arrayWithObject:des]];
-            [logs addObject:log];
-            break;
-        }
-    }while ([self hasHitBackSrc:src des:des]); // 是否有反击
-    
-    originSrc.isActioned = YES;
     
     return logs;
+}
+
+
+- (NSArray *)_castBySrc:(CGBattleUnit *)src
+                  toDes:(CGBattleUnit *)des
+{
+    // A 攻击 B
+    NSMutableArray *logs = [NSMutableArray array];
+    
+    BOOL isHit = [self isHitSrc:src des:des];
+    
+    if (isHit) {
+        // hit
+        int damage = [self damageByAtk:src.atk def:des.def k:[self damageK]];
+        
+        if ([self canDoMeleeDamageBySrc:src toDes:des]) {
+            NSArray *l = [self doMeleeDamageBySrc:src toDes:des damage:damage];
+            [logs addObjectsFromArray:l];
+        }
+        else {
+            // 反弹或无效
+            NSArray *l = [self doMeleeFailedDamageBySrc:src toDes:des damage:damage];
+            [logs addObjectsFromArray:l];
+        }
+    }
+    else {
+        // miss
+        CGBattleMeleeMissLog *log = [[CGBattleMeleeMissLog alloc] initWithSID:self.SID
+                                                                          src:src
+                                                                        deses:@[des]];
+        [logs addObject:log];
+    }
+    return logs;
+}
+
+- (NSArray *)doMeleeDamageBySrc:(CGBattleUnit *)src
+                          toDes:(CGBattleUnit *)des
+                         damage:(int)damage
+{
+    NSMutableArray *logs = [NSMutableArray array];
+    
+    // 攻击
+    CGBattleMeleeLog *log = [[CGBattleMeleeLog alloc] initWithSID:self.SID
+                                                              src:src
+                                                            deses:@[des]
+                                                            value:damage];
+    [logs addObject:log];
+    
+    des.hp -= damage;
+    des.hp = MAX(des.hp, 0);
+    des.isAlive = des.hp > 0;
+    
+    if (!des.isAlive) {
+        // 死亡
+        CGBattleDeadLog *log = [[CGBattleDeadLog alloc] initWithSrc:des];
+        [logs addObject:log];
+    }
+    
+    return logs;
+}
+
+@end
+
+
+# pragma mark - 反击
+
+@implementation CGSkillMeleeHitBackNormal
+
+- (instancetype)init
+{
+    self = [super initWithSID:CGSkillIdMeleeHitBackNormal];
+    if (self) {
+        self.targetAvailable = CGSkillTargetAvailableEnemy;
+        self.menualTargetAvailable = CGSkillTargetAvailableEnemy | CGSkillTargetAvailableFriend;
+        self.effArea = CGSkillEffect1;
+        self.name = @"反击";
+    }
+    return self;
+}
+
+- (NSArray *)castBySrc:(CGBattleUnit *)src
+                 toDes:(CGBattleUnit *)des
+{
+    NSMutableArray *logs = [NSMutableArray array];
+    
+    NSArray *l = [self _castBySrc:src toDes:des];
+    [logs addObjectsFromArray:l];
+    
+    if (des.isAlive && [self hasHitBack:des]) {
+        CGSkill *sk = [CGSkill skillWithSID:CGSkillIdMeleeHitBackNormal];
+        NSArray *l = [sk castBySrc:des toDes:src];
+        [logs addObjectsFromArray:l];
+    }
+    
+    return logs;
+}
+
+
+- (NSArray *)_castBySrc:(CGBattleUnit *)src
+                  toDes:(CGBattleUnit *)des
+{
+    // A 攻击 B
+    NSMutableArray *logs = [NSMutableArray array];
+    
+    BOOL isHit = [self isHitSrc:src des:des];
+    
+    if (isHit) {
+        // hit
+        int damage = [self damageByAtk:src.atk def:des.def k:[self damageK]];
+        
+        if ([self canDoMeleeDamageBySrc:src toDes:des]) {
+            NSArray *l = [self doMeleeDamageBySrc:src toDes:des damage:damage];
+            [logs addObjectsFromArray:l];
+        }
+        else {
+            // 反弹或无效
+            NSArray *l = [self doMeleeFailedDamageBySrc:src toDes:des damage:damage];
+            [logs addObjectsFromArray:l];
+        }
+    }
+    else {
+        // miss
+        CGBattleMeleeMissLog *log = [[CGBattleMeleeMissLog alloc] initWithSID:self.SID
+                                                                          src:src
+                                                                        deses:@[des]];
+        [logs addObject:log];
+    }
+    return logs;
+}
+
+- (NSArray *)doMeleeDamageBySrc:(CGBattleUnit *)src
+                          toDes:(CGBattleUnit *)des
+                         damage:(int)damage
+{
+    NSMutableArray *logs = [NSMutableArray array];
+    
+    // 攻击
+    CGBattleMeleeHitBackLog *log = [[CGBattleMeleeHitBackLog alloc] initWithSID:self.SID
+                                                                            src:src
+                                                                          deses:@[des]
+                                                                          value:damage];
+    [logs addObject:log];
+    
+    des.hp -= damage;
+    des.hp = MAX(des.hp, 0);
+    des.isAlive = des.hp > 0;
+    
+    if (!des.isAlive) {
+        // 死亡
+        CGBattleDeadLog *log = [[CGBattleDeadLog alloc] initWithSrc:des];
+        [logs addObject:log];
+    }
+    
+    return logs;
+}
+
+
+- (float)damageK
+{// 40%~60%
+    return (CGRandom(20) + 40) / 100.f;
 }
 
 - (BOOL)isHitSrc:(CGBattleUnit *)src
              des:(CGBattleUnit *)des
 {
-#warning TODO
+#warning TODO 缺命中率公式
     return CGJudgeRandom1to100(90);
 }
 
-- (BOOL)hasHitBackSrc:(CGBattleUnit *)src
-                  des:(CGBattleUnit *)des
+@end
+
+
+@implementation CGSkillMeleeQianKun
+
+- (instancetype)init
 {
-#warning TODO
-    return CGJudgeRandom1to100(50);
+    self = [super initWithSID:CGSkillIdMeleeQiankun];
+    if (self) {
+        self.targetAvailable = CGSkillTargetAvailableEnemy;
+        self.menualTargetAvailable = CGSkillTargetAvailableEnemy | CGSkillTargetAvailableFriend;
+        self.effArea = CGSkillEffect1;
+        self.name = @"乾坤一击";
+        
+        CGSkillBuffParam *p1 = [[CGSkillBuffParam alloc] init];
+        p1.t = CGSkillBuffAtk;
+        p1.a = 0;
+        p1.k = 1.5;
+        
+        CGSkillBuffParam *p2 = [[CGSkillBuffParam alloc] init];
+        p2.t = CGSkillBuffMeleeHitRat;
+        p2.a = 0;
+        p2.k = 0.8;
+        
+        self.buffParams = [NSMutableArray arrayWithObjects:p1, p2, nil];
+        
+    }
+    return self;
 }
 
-// 伤害系数
 - (float)damageK
-{// 90%~110%
-    return (CGRandom(20) + 90) / 100.f;
-}
-
-- (float)damageHitBackK
-{// 40%~60%
-    return (CGRandom(20) + 40) / 100.f;
-}
-
-
-- (CGBattleUnit *)searchObject:(NSMutableSet *)units
-                      byLocation:(int)loc
-
 {
-    for (CGBattleUnit *unit in units) {
-        if (unit.location == loc) {
-            return unit;
+    CGSkillBuffParam *atkParam = nil;
+    for (CGSkillBuffParam *p in self.buffParams) {
+        if (p.t == CGSkillBuffAtk) {
+            atkParam = p;
+            break;
+        }
+    }
+    return (CGRandom(20) + 90) / 100.f * atkParam.k + atkParam.t;
+}
+
+- (BOOL)isHitSrc:(CGBattleUnit *)src
+             des:(CGBattleUnit *)des
+{
+#warning TODO 缺命中率公式
+    CGSkillBuffParam *atkParam = nil;
+    for (CGSkillBuffParam *p in self.buffParams) {
+        if (p.t == CGSkillBuffMeleeHitRat) {
+            atkParam = p;
+            break;
         }
     }
     
-    return nil;
+    return CGJudgeRandom1to100((int)(90*atkParam.k));
 }
 
 @end

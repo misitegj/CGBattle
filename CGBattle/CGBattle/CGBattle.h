@@ -18,11 +18,6 @@ typedef enum : NSUInteger {
     
 } CGBattleState;
 
-typedef enum : NSUInteger {
-    CGBattleTeamAtker,
-    CGBattleTeamDefer,
-    
-} CGBattleTeamType;
 
 
 @class CGBattle;

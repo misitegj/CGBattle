@@ -146,8 +146,7 @@
     NSMutableArray *actions = [NSMutableArray array];
     
     for (CGBattleUnit *unit in _world.aliveSet) {
-        CGAction *a = [[CGAction alloc] initWithUnit:unit world:_world];
-        [a AI_calcNextAction];
+        CGAction *a = [unit selectSkillAndTarget:_world];
         [actions addObject:a];
     }
     
@@ -182,11 +181,7 @@
         }
         
         if ([self unitCanAction:unit]) {
-            
-            CGSkill *sk = [CGSkill skillWithSID:action.skillID];
-            NSArray *l = [sk battleLogsWithUnits:_world.aliveSet
-                                          srcLoc:action.srcLoc
-                                          desLoc:action.desLoc];
+            NSArray *l = [unit doAction:action world:_world];
             [logs addObjectsFromArray:l];
         }
         else {

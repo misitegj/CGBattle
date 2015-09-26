@@ -14,7 +14,6 @@
 		180150521BAD5E8D0081A5E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 180150511BAD5E8D0081A5E9 /* Images.xcassets */; };
 		180150551BAD5E8D0081A5E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180150531BAD5E8D0081A5E9 /* LaunchScreen.xib */; };
 		180150611BAD5E8E0081A5E9 /* CGBattleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 180150601BAD5E8E0081A5E9 /* CGBattleTests.m */; };
-		1801506C1BAD5F3F0081A5E9 /* CGUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801506B1BAD5F3F0081A5E9 /* CGUnit.m */; };
 		1801506F1BAD60120081A5E9 /* CGBattleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801506E1BAD60120081A5E9 /* CGBattleManager.m */; };
 		180150721BAE2F200081A5E9 /* CG.m in Sources */ = {isa = PBXBuildFile; fileRef = 180150711BAE2F200081A5E9 /* CG.m */; };
 		180150751BAE58EA0081A5E9 /* CGBattleUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 180150741BAE58EA0081A5E9 /* CGBattleUnit.m */; };
@@ -24,6 +23,7 @@
 		185A9BAC1BB42A14005C7A5C /* CGRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BAB1BB42A14005C7A5C /* CGRound.m */; };
 		185A9BAF1BB42A35005C7A5C /* CGWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BAE1BB42A35005C7A5C /* CGWorld.m */; };
 		185A9BB21BB42E13005C7A5C /* EMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BB11BB42E13005C7A5C /* EMLogManager.m */; };
+		185A9BB51BB63D38005C7A5C /* CGPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BB41BB63D38005C7A5C /* CGPlayer.m */; };
 		964D183C1BB5240C00157C83 /* CGAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 964D183B1BB5240C00157C83 /* CGAction.m */; };
 /* End PBXBuildFile section */
 
@@ -51,8 +51,6 @@
 		1801505A1BAD5E8E0081A5E9 /* CGBattleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CGBattleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1801505F1BAD5E8E0081A5E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		180150601BAD5E8E0081A5E9 /* CGBattleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGBattleTests.m; sourceTree = "<group>"; };
-		1801506A1BAD5F3F0081A5E9 /* CGUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGUnit.h; sourceTree = "<group>"; };
-		1801506B1BAD5F3F0081A5E9 /* CGUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGUnit.m; sourceTree = "<group>"; };
 		1801506D1BAD60120081A5E9 /* CGBattleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGBattleManager.h; sourceTree = "<group>"; };
 		1801506E1BAD60120081A5E9 /* CGBattleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGBattleManager.m; sourceTree = "<group>"; };
 		180150701BAE2C4E0081A5E9 /* CG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CG.h; sourceTree = "<group>"; };
@@ -71,6 +69,8 @@
 		185A9BAE1BB42A35005C7A5C /* CGWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGWorld.m; sourceTree = "<group>"; };
 		185A9BB01BB42E13005C7A5C /* EMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMLogManager.h; sourceTree = "<group>"; };
 		185A9BB11BB42E13005C7A5C /* EMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLogManager.m; sourceTree = "<group>"; };
+		185A9BB31BB63D38005C7A5C /* CGPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPlayer.h; sourceTree = "<group>"; };
+		185A9BB41BB63D38005C7A5C /* CGPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPlayer.m; sourceTree = "<group>"; };
 		964D183A1BB5240C00157C83 /* CGAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAction.h; sourceTree = "<group>"; };
 		964D183B1BB5240C00157C83 /* CGAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,8 +116,8 @@
 			children = (
 				180150481BAD5E8D0081A5E9 /* AppDelegate.h */,
 				180150491BAD5E8D0081A5E9 /* AppDelegate.m */,
-				1801506A1BAD5F3F0081A5E9 /* CGUnit.h */,
-				1801506B1BAD5F3F0081A5E9 /* CGUnit.m */,
+				185A9BB31BB63D38005C7A5C /* CGPlayer.h */,
+				185A9BB41BB63D38005C7A5C /* CGPlayer.m */,
 				180150761BAE59740081A5E9 /* CGSkill.h */,
 				180150771BAE59740081A5E9 /* CGSkill.m */,
 				964D183A1BB5240C00157C83 /* CGAction.h */,
@@ -279,9 +279,9 @@
 				1801504D1BAD5E8D0081A5E9 /* ViewController.m in Sources */,
 				1801504A1BAD5E8D0081A5E9 /* AppDelegate.m in Sources */,
 				185A9BAC1BB42A14005C7A5C /* CGRound.m in Sources */,
+				185A9BB51BB63D38005C7A5C /* CGPlayer.m in Sources */,
 				185A9BAF1BB42A35005C7A5C /* CGWorld.m in Sources */,
 				180150721BAE2F200081A5E9 /* CG.m in Sources */,
-				1801506C1BAD5F3F0081A5E9 /* CGUnit.m in Sources */,
 				964D183C1BB5240C00157C83 /* CGAction.m in Sources */,
 				185A9BA61BB429FE005C7A5C /* CGBattle.m in Sources */,
 				180150781BAE59740081A5E9 /* CGSkill.m in Sources */,

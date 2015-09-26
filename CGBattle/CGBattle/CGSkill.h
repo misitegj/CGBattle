@@ -42,14 +42,18 @@ typedef NS_ENUM(NSUInteger, CGSkillBuffType) {
     CGSkillBuffHp, // 相当于回复血量
     CGSkillBuffMp,
     
+    CGSkillBuffMeleeHitRat, // 攻击命中率
+    
 };
 
-// 增益或损害, var = var * k + a
-@interface CGSkillBuff : NSObject
+// 增益或损害参数, var = var * k + a
+@interface CGSkillBuffParam : NSObject
 @property (nonatomic, assign) CGSkillBuffType t;
 @property (nonatomic, assign) float a;
 @property (nonatomic, assign) float k;
 @end
+
+@class CGBattleUnit;
 
 // 技能
 @interface CGSkill : NSObject
@@ -57,28 +61,35 @@ typedef NS_ENUM(NSUInteger, CGSkillBuffType) {
 @property (nonatomic, assign, readonly) CGSkillID SID;
 @property (nonatomic, strong) NSString *name;
 
+@property (nonatomic, assign) CGSkillTargetAvailable menualTargetAvailable; // 可以选择的目标
 @property (nonatomic, assign) CGSkillTargetAvailable targetAvailable; // 可以选择的目标
 @property (nonatomic, assign) CGSkillEffectArea effArea;
 @property (nonatomic, assign) float duration; // 持续回合
 
-@property (nonatomic, strong) NSMutableArray *buffs; // 战斗和魔法技能影响
+@property (nonatomic, strong) NSMutableArray *buffParams; // 战斗和魔法技能影响
 @property (nonatomic, assign) float hitRate; // 技能命中率, 默认1成功, 例如驱散技能, 不是每次都成功
+@property (nonatomic, assign) int level; // 等级
 
 + (CGSkill *)skillWithSID:(CGSkillID)SID;
+
+- (NSArray *)castBySrc:(CGBattleUnit *)src
+                 toDes:(CGBattleUnit *)des;
 
 @end
 
 
-@class CGUnit, CGBattleUnit;
+// 普通物理攻击
+@interface CGSkillMeleeNormal : CGSkill
 
-@interface CGSkill(BattleLog)
-// 计算战斗日志
-- (NSMutableArray *)battleLogsWithUnits:(NSMutableSet *)units
-                                   src:(CGBattleUnit *)src
-                                   des:(CGBattleUnit *)des;
+@end
 
-- (NSMutableArray *)battleLogsWithUnits:(NSMutableSet *)units
-                                srcLoc:(int)srcLoc
-                                desLoc:(int)desLoc;
+
+// 反击
+@interface CGSkillMeleeHitBackNormal : CGSkill
+@end
+
+
+// 乾坤
+@interface CGSkillMeleeQianKun : CGSkillMeleeNormal
 
 @end

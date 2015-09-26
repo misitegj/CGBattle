@@ -11,25 +11,18 @@
 #import "CGWorld.h"
 
 
+// 行动 用作存储
 @interface CGAction : NSObject
+
 @property (nonatomic, assign) int order;
 
-@property (nonatomic, strong, readonly) CGBattleUnit *src; // 行动者
-@property (nonatomic, assign, readonly) int srcLoc; // 行动者位置
+@property (nonatomic, strong) CGBattleUnit *src; // 行动者
+@property (nonatomic, assign) int srcLoc; // 行动者位置
 
 @property (nonatomic, strong) CGBattleUnit *des;
 @property (nonatomic, assign) int desLoc; // 下一步行动的对象位置
 
 @property (nonatomic, assign) int skillID; // 下一步行动的技能ID
 
-@property (nonatomic, strong) NSArray *logs; // action logs
-
-- (instancetype)initWithUnit:(CGBattleUnit *)src
-                       world:(CGWorld *)world;
-
-
-- (BOOL)AI_calcNextAction; // set desLoc & skillID
-
-- (NSArray *)doAction;
-
+@property (nonatomic, strong) NSArray *logs; // 行动日志
 @end

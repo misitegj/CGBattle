@@ -33,10 +33,6 @@
 
 - (BOOL)isOneTeamAllDead;
 
+- (CGBattleUnit *)searchUnitByLocation:(int)loc;
+
 @end
-
-
-extern BOOL randomSkillAndTarget(CGBattleUnit *src, id units, CGAction* action);
-extern CGBattleUnit* randomTarget(CGBattleUnit *src, id units, CGSkillTargetAvailable skTarAva);
-extern BOOL canTarget(CGBattleUnit *src, CGBattleUnit *des, CGSkillTargetAvailable tarAva);
-

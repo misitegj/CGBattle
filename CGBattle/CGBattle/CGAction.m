@@ -8,38 +8,8 @@
 
 #import "CGAction.h"
 
-@interface CGAction()
-@property (nonatomic, strong) CGWorld *world;
-
-@end
-
 @implementation CGAction
 
-- (instancetype)initWithUnit:(CGBattleUnit *)src
-                       world:(CGWorld *)world
-{
-    self = [super init];
-    if (self) {
-        _src = src;
-        _world = world;
-        _srcLoc = src.location;
-        
-        [self AI_calcNextAction];
-    }
-    return self;
-}
-
-- (BOOL)AI_calcNextAction
-{
-    return randomSkillAndTarget(_src, _world.aliveSet, self);
-}
-
-
-- (NSArray *)doAction
-{
-    
-    return nil;
-}
 
 
 @end
