@@ -12,7 +12,7 @@
 #define kTeamBLocationOffset 10
 
 
-@class CGBattleUnit, CGAction;
+@class CGUnit, CGAction;
 
 @interface CGWorld : NSObject
 
@@ -33,6 +33,6 @@
 
 - (BOOL)isOneTeamAllDead;
 
-- (CGBattleUnit *)searchUnitByLocation:(int)loc;
+- (CGUnit *)searchUnitByLocation:(int)loc;
 
 @end

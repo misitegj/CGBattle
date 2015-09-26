@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Samuel. All rights reserved.
 //
 
-#import "CGBattleUnit.h"
+#import "CGUnit.h"
 #import "CGSkill.h"
 #import "CGWorld.h"
 #import "CGAction.h"
 #import "CGBattleLog.h"
 
-@implementation CGBattleUnit
+@implementation CGUnit
 
 - (instancetype)init
 {
@@ -30,7 +30,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    CGBattleUnit *u = [[[self class] allocWithZone:zone] init];
+    CGUnit *u = [[[self class] allocWithZone:zone] init];
     u.UID = self.UID;
     u.originName = self.originName;
     u.name = self.name;
@@ -99,8 +99,8 @@
 - (NSArray *)doAction:(CGAction *)action
                 world:(CGWorld *)world
 {
-    CGBattleUnit *src = action.src;
-    CGBattleUnit *des = action.des;
+    CGUnit *src = action.src;
+    CGUnit *des = action.des;
     CGSkill *sk = [CGSkill skillWithSID:action.skillID];
     
     if (!des.isAlive || des==nil) {
@@ -124,7 +124,7 @@
 - (CGAction *)randomSkillAndTarget:(CGWorld *)world
 {
     CGSkill *sk = [self randomSkill:world];
-    CGBattleUnit *tar = [self randomTarget:world targetAvailable:sk.targetAvailable];
+    CGUnit *tar = [self randomTarget:world targetAvailable:sk.targetAvailable];
     
     if (!tar) {
         return 0;
@@ -150,7 +150,7 @@
     return [CGSkill skillWithSID:CGSkillIdMeleeNormal];
 }
 
-- (CGBattleUnit *)randomTarget:(CGWorld *)world
+- (CGUnit *)randomTarget:(CGWorld *)world
                targetAvailable:(CGSkillTargetAvailable)ava
 {
     assert([world.aliveSet count]>0);
@@ -158,7 +158,7 @@
     NSMutableSet *set = [world.aliveSet mutableCopy];
     
     do {
-        CGBattleUnit *unit = [set anyObject];
+        CGUnit *unit = [set anyObject];
         
         if (unit.isAlive && [self canTarget:unit targetAvailable:ava]) {
             return unit;
@@ -171,7 +171,7 @@
     return nil;
 }
 
-- (BOOL)canTarget:(CGBattleUnit *)des
+- (BOOL)canTarget:(CGUnit *)des
   targetAvailable:(CGSkillTargetAvailable)ava
 {
     if (self == des) {

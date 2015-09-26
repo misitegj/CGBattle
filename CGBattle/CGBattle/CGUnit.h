@@ -31,7 +31,7 @@ typedef enum : NSUInteger {
 
 @class CGWorld, CGAction;
 
-@interface CGBattleUnit : NSObject <NSCopying>
+@interface CGUnit : NSObject <NSCopying>
 
 
 @property (nonatomic, assign) int UID;
@@ -116,14 +116,14 @@ typedef enum : NSUInteger {
 @end
 
 // 宠物
-@interface CGPet : CGBattleUnit
+@interface CGPet : CGUnit
 @property (nonatomic, assign) int loyalty; // 忠诚度
 
 
 @end
 
 
-@interface CGEnemy : CGBattleUnit
+@interface CGEnemy : CGUnit
 @property (nonatomic, strong) NSArray *rootItems; // 掉落物品, 敌方only
 @end
 

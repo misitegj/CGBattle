@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CGBattleUnit.h"
+#import "CGUnit.h"
 #import "CGWorld.h"
 
 
@@ -16,10 +16,10 @@
 
 @property (nonatomic, assign) int order;
 
-@property (nonatomic, strong) CGBattleUnit *src; // 行动者
+@property (nonatomic, strong) CGUnit *src; // 行动者
 @property (nonatomic, assign) int srcLoc; // 行动者位置
 
-@property (nonatomic, strong) CGBattleUnit *des;
+@property (nonatomic, strong) CGUnit *des;
 @property (nonatomic, assign) int desLoc; // 下一步行动的对象位置
 
 @property (nonatomic, assign) int skillID; // 下一步行动的技能ID

@@ -16,7 +16,7 @@
 		180150611BAD5E8E0081A5E9 /* CGBattleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 180150601BAD5E8E0081A5E9 /* CGBattleTests.m */; };
 		1801506F1BAD60120081A5E9 /* CGBattleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801506E1BAD60120081A5E9 /* CGBattleManager.m */; };
 		180150721BAE2F200081A5E9 /* CG.m in Sources */ = {isa = PBXBuildFile; fileRef = 180150711BAE2F200081A5E9 /* CG.m */; };
-		180150751BAE58EA0081A5E9 /* CGBattleUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 180150741BAE58EA0081A5E9 /* CGBattleUnit.m */; };
+		180150751BAE58EA0081A5E9 /* CGUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 180150741BAE58EA0081A5E9 /* CGUnit.m */; };
 		180150781BAE59740081A5E9 /* CGSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 180150771BAE59740081A5E9 /* CGSkill.m */; };
 		1801507B1BAE5E3D0081A5E9 /* CGBattleLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801507A1BAE5E3D0081A5E9 /* CGBattleLog.m */; };
 		185A9BA61BB429FE005C7A5C /* CGBattle.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BA51BB429FE005C7A5C /* CGBattle.m */; };
@@ -55,8 +55,8 @@
 		1801506E1BAD60120081A5E9 /* CGBattleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGBattleManager.m; sourceTree = "<group>"; };
 		180150701BAE2C4E0081A5E9 /* CG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CG.h; sourceTree = "<group>"; };
 		180150711BAE2F200081A5E9 /* CG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CG.m; sourceTree = "<group>"; };
-		180150731BAE58EA0081A5E9 /* CGBattleUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGBattleUnit.h; sourceTree = "<group>"; };
-		180150741BAE58EA0081A5E9 /* CGBattleUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGBattleUnit.m; sourceTree = "<group>"; };
+		180150731BAE58EA0081A5E9 /* CGUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGUnit.h; sourceTree = "<group>"; };
+		180150741BAE58EA0081A5E9 /* CGUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGUnit.m; sourceTree = "<group>"; };
 		180150761BAE59740081A5E9 /* CGSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSkill.h; sourceTree = "<group>"; };
 		180150771BAE59740081A5E9 /* CGSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSkill.m; sourceTree = "<group>"; };
 		180150791BAE5E3D0081A5E9 /* CGBattleLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGBattleLog.h; sourceTree = "<group>"; };
@@ -122,8 +122,8 @@
 				180150771BAE59740081A5E9 /* CGSkill.m */,
 				964D183A1BB5240C00157C83 /* CGAction.h */,
 				964D183B1BB5240C00157C83 /* CGAction.m */,
-				180150731BAE58EA0081A5E9 /* CGBattleUnit.h */,
-				180150741BAE58EA0081A5E9 /* CGBattleUnit.m */,
+				180150731BAE58EA0081A5E9 /* CGUnit.h */,
+				180150741BAE58EA0081A5E9 /* CGUnit.m */,
 				180150791BAE5E3D0081A5E9 /* CGBattleLog.h */,
 				1801507A1BAE5E3D0081A5E9 /* CGBattleLog.m */,
 				1801506D1BAD60120081A5E9 /* CGBattleManager.h */,
@@ -286,7 +286,7 @@
 				185A9BA61BB429FE005C7A5C /* CGBattle.m in Sources */,
 				180150781BAE59740081A5E9 /* CGSkill.m in Sources */,
 				180150471BAD5E8D0081A5E9 /* main.m in Sources */,
-				180150751BAE58EA0081A5E9 /* CGBattleUnit.m in Sources */,
+				180150751BAE58EA0081A5E9 /* CGUnit.m in Sources */,
 				1801507B1BAE5E3D0081A5E9 /* CGBattleLog.m in Sources */,
 				185A9BB21BB42E13005C7A5C /* EMLogManager.m in Sources */,
 			);

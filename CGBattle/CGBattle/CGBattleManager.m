@@ -7,7 +7,7 @@
 //
 
 #import "CGBattleManager.h"
-#import "CGBattleUnit.h"
+#import "CGUnit.h"
 #import "CG.h"
 #import "CGBattleLog.h"
 

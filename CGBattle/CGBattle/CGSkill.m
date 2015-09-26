@@ -7,7 +7,7 @@
 //
 
 #import "CGSkill.h"
-#import "CGBattleUnit.h"
+#import "CGUnit.h"
 #import "CGBattleLog.h"
 #import "CGWorld.h"
 
@@ -36,17 +36,17 @@
 - (CGSkill *)initWithSID:(CGSkillID)SID;
 
 // 是否命中
-- (BOOL)isHitSrc:(CGBattleUnit *)src
-             des:(CGBattleUnit *)des;
+- (BOOL)isHitSrc:(CGUnit *)src
+             des:(CGUnit *)des;
 
 // 伤害系数 90%~110%
 - (float)damageK;
 
 // 是否可以反击
-- (BOOL)hasHitBack:(CGBattleUnit *)util;
+- (BOOL)hasHitBack:(CGUnit *)util;
 
 // 反击是否触发概率
-- (BOOL)isHitBackTrigger:(CGBattleUnit *)src;
+- (BOOL)isHitBackTrigger:(CGUnit *)src;
 
 @end
 
@@ -84,8 +84,8 @@
     return self;
 }
 
-- (NSArray *)castBySrc:(CGBattleUnit *)src
-                 toDes:(CGBattleUnit *)des
+- (NSArray *)castBySrc:(CGUnit *)src
+                 toDes:(CGUnit *)des
 {
     assert(0); // 子类实现
     
@@ -94,8 +94,8 @@
 
 # pragma mark -
 
-- (BOOL)canDoMeleeDamageBySrc:(CGBattleUnit *)src
-                        toDes:(CGBattleUnit *)des
+- (BOOL)canDoMeleeDamageBySrc:(CGUnit *)src
+                        toDes:(CGUnit *)des
 {
     for (id b in des.buffs) {
 #warning TODO  无效或反弹
@@ -104,8 +104,8 @@
     return YES;
 }
 
-- (NSArray *)doMeleeFailedDamageBySrc:(CGBattleUnit *)src
-                                toDes:(CGBattleUnit *)des
+- (NSArray *)doMeleeFailedDamageBySrc:(CGUnit *)src
+                                toDes:(CGUnit *)des
                                damage:(int)damage
 {
     CGSkillID SID = CGSkillIdMeleeNormal;
@@ -117,8 +117,8 @@
 }
 
 
-- (BOOL)canDoMagicDamageBySrc:(CGBattleUnit *)src
-                        toDes:(CGBattleUnit *)des
+- (BOOL)canDoMagicDamageBySrc:(CGUnit *)src
+                        toDes:(CGUnit *)des
 {
     for (id b in des.buffs) {
 #warning TODO  无效或反弹
@@ -127,8 +127,8 @@
     return YES;
 }
 
-- (NSArray *)doMagicFailedDamageBySrc:(CGBattleUnit *)src
-                                toDes:(CGBattleUnit *)des
+- (NSArray *)doMagicFailedDamageBySrc:(CGUnit *)src
+                                toDes:(CGUnit *)des
                                damage:(int)damage
 {
     CGSkillID SID = CGSkillIdMeleeNormal;
@@ -143,8 +143,8 @@
 # pragma mark -
 
 // 是否命中
-- (BOOL)isHitSrc:(CGBattleUnit *)src
-             des:(CGBattleUnit *)des
+- (BOOL)isHitSrc:(CGUnit *)src
+             des:(CGUnit *)des
 {
 #warning TODO 缺命中率公式
     return CGJudgeRandom1to100(90);
@@ -157,13 +157,13 @@
 }
 
 // 是否可以反击
-- (BOOL)hasHitBack:(CGBattleUnit *)util
+- (BOOL)hasHitBack:(CGUnit *)util
 {
     return [util canMeleeHitBack] && [self isHitBackTrigger:util];
 }
 
 // 反击是否触发概率
-- (BOOL)isHitBackTrigger:(CGBattleUnit *)src
+- (BOOL)isHitBackTrigger:(CGUnit *)src
 {
 #warning TODO 缺反击触发概率
     return CGJudgeRandom1to100(30);
@@ -201,8 +201,8 @@
 }
 
 
-- (NSArray *)castBySrc:(CGBattleUnit *)src
-                 toDes:(CGBattleUnit *)des
+- (NSArray *)castBySrc:(CGUnit *)src
+                 toDes:(CGUnit *)des
 {
     NSMutableArray *logs = [NSMutableArray array];
     
@@ -220,8 +220,8 @@
 }
 
 
-- (NSArray *)_castBySrc:(CGBattleUnit *)src
-                  toDes:(CGBattleUnit *)des
+- (NSArray *)_castBySrc:(CGUnit *)src
+                  toDes:(CGUnit *)des
 {
     // A 攻击 B
     NSMutableArray *logs = [NSMutableArray array];
@@ -252,8 +252,8 @@
     return logs;
 }
 
-- (NSArray *)doMeleeDamageBySrc:(CGBattleUnit *)src
-                          toDes:(CGBattleUnit *)des
+- (NSArray *)doMeleeDamageBySrc:(CGUnit *)src
+                          toDes:(CGUnit *)des
                          damage:(int)damage
 {
     NSMutableArray *logs = [NSMutableArray array];
@@ -297,8 +297,8 @@
     return self;
 }
 
-- (NSArray *)castBySrc:(CGBattleUnit *)src
-                 toDes:(CGBattleUnit *)des
+- (NSArray *)castBySrc:(CGUnit *)src
+                 toDes:(CGUnit *)des
 {
     NSMutableArray *logs = [NSMutableArray array];
     
@@ -315,8 +315,8 @@
 }
 
 
-- (NSArray *)_castBySrc:(CGBattleUnit *)src
-                  toDes:(CGBattleUnit *)des
+- (NSArray *)_castBySrc:(CGUnit *)src
+                  toDes:(CGUnit *)des
 {
     // A 攻击 B
     NSMutableArray *logs = [NSMutableArray array];
@@ -347,8 +347,8 @@
     return logs;
 }
 
-- (NSArray *)doMeleeDamageBySrc:(CGBattleUnit *)src
-                          toDes:(CGBattleUnit *)des
+- (NSArray *)doMeleeDamageBySrc:(CGUnit *)src
+                          toDes:(CGUnit *)des
                          damage:(int)damage
 {
     NSMutableArray *logs = [NSMutableArray array];
@@ -379,8 +379,8 @@
     return (CGRandom(20) + 40) / 100.f;
 }
 
-- (BOOL)isHitSrc:(CGBattleUnit *)src
-             des:(CGBattleUnit *)des
+- (BOOL)isHitSrc:(CGUnit *)src
+             des:(CGUnit *)des
 {
 #warning TODO 缺命中率公式
     return CGJudgeRandom1to100(90);
@@ -428,8 +428,8 @@
     return (CGRandom(20) + 90) / 100.f * atkParam.k + atkParam.t;
 }
 
-- (BOOL)isHitSrc:(CGBattleUnit *)src
-             des:(CGBattleUnit *)des
+- (BOOL)isHitSrc:(CGUnit *)src
+             des:(CGUnit *)des
 {
 #warning TODO 缺命中率公式
     CGSkillBuffParam *atkParam = nil;

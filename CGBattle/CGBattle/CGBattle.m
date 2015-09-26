@@ -8,7 +8,7 @@
 
 #import "CGBattle.h"
 #import "CGRound.h"
-#import "CGBattleUnit.h"
+#import "CGUnit.h"
 
 @implementation CGBattle
 

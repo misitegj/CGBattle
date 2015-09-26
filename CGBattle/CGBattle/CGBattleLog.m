@@ -7,7 +7,7 @@
 //
 
 #import "CGBattleLog.h"
-#import "CGBattleUnit.h"
+#import "CGUnit.h"
 #import <UIKit/UIKit.h>
 
 
@@ -45,7 +45,7 @@
 
 - (NSString *)description
 {
-    CGBattleUnit *src = self.src;
+    CGUnit *src = self.src;
     
     assert([self.deses count]>0);
     
@@ -53,7 +53,7 @@
         
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
-        for (CGBattleUnit *des in self.deses) {
+        for (CGUnit *des in self.deses) {
             CGSkill *sk = [CGSkill skillWithSID:self.SID];
             
             [mstr appendString:[src.name length]?src.name:@"未知"];
@@ -77,7 +77,7 @@
 }
 
 - (id)initWithSID:(CGSkillID)SID
-              src:(CGBattleUnit *)src
+              src:(CGUnit *)src
             deses:(NSArray *)deses
             value:(int)value
 {
@@ -103,7 +103,7 @@
 @implementation CGBattleMeleeMissLog
 
 - (id)initWithSID:(CGSkillID)SID
-              src:(CGBattleUnit *)src
+              src:(CGUnit *)src
             deses:(NSArray *)deses
 {
     self = [super init];
@@ -124,7 +124,7 @@
     if (!self.desc) {
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
-        for (CGBattleUnit *des in self.deses) {
+        for (CGUnit *des in self.deses) {
             CGSkill *sk = [CGSkill skillWithSID:self.SID];
             
             [mstr appendString:[self.src.name length] ? self.src.name : @"未知"];
@@ -146,7 +146,7 @@
 
 @implementation CGBattleDeadLog
 
-- (id)initWithSrc:(CGBattleUnit *)src
+- (id)initWithSrc:(CGUnit *)src
 {
     self = [super init];
     if (self) {
@@ -256,7 +256,7 @@
     if (!self.desc) {
         NSMutableString *mstr = [[NSMutableString alloc] init];
         
-        for (CGBattleUnit *unit in self.deses) {
+        for (CGUnit *unit in self.deses) {
             [mstr appendFormat:@"%@[%ld]\n", unit.name, (long)unit.hp];
         }
         self.desc = mstr;

@@ -8,7 +8,7 @@
 
 #import "CGRound.h"
 #import "CGWorld.h"
-#import "CGBattleUnit.h"
+#import "CGUnit.h"
 #import "CGBattle.h"
 #import "CGAction.h"
 
@@ -130,7 +130,7 @@
 
 - (void)roundBegin:(int)round
 {
-    for (CGBattleUnit *unit in _world.aliveSet) {
+    for (CGUnit *unit in _world.aliveSet) {
         unit.isActioned = NO;
     }
 }
@@ -145,7 +145,7 @@
     // 所有对象 选择完技能和对象
     NSMutableArray *actions = [NSMutableArray array];
     
-    for (CGBattleUnit *unit in _world.aliveSet) {
+    for (CGUnit *unit in _world.aliveSet) {
         CGAction *a = [unit selectSkillAndTarget:_world];
         [actions addObject:a];
     }
@@ -174,7 +174,7 @@
     
     // 计算人物行动
     for (CGAction *action in _actions) {
-        CGBattleUnit *unit = action.src;
+        CGUnit *unit = action.src;
         
         if ([_world isOneTeamAllDead]) {// 每一个人行动结束, 都要判断是否结束
             break;
@@ -257,7 +257,7 @@ typedef NSComparisonResult (^NSComparator)(id unit1, id unit2);
     // 计算或者和死亡的列表
     NSMutableSet *tmpSet = [NSMutableSet set];
     
-    for (CGBattleUnit *unit in _world.aliveSet) {
+    for (CGUnit *unit in _world.aliveSet) {
         if (!unit.isAlive || unit.hp<=0) {
             unit.isAlive = NO;
             unit.hp = 0;
@@ -269,7 +269,7 @@ typedef NSComparisonResult (^NSComparator)(id unit1, id unit2);
     [_world.deadSet unionSet:tmpSet];
 }
 
-- (BOOL)unitCanAction:(CGBattleUnit *)unit
+- (BOOL)unitCanAction:(CGUnit *)unit
 {
     return unit.isAlive && !unit.isActioned;
 }

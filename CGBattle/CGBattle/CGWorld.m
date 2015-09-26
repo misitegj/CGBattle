@@ -7,7 +7,7 @@
 //
 
 #import "CGWorld.h"
-#import "CGBattleUnit.h"
+#import "CGUnit.h"
 #import "CGBattle.h"
 #import "CGAction.h"
 
@@ -48,14 +48,14 @@
     _deadSet = [[NSMutableSet alloc] init];
     
     for (int i=0; i<[_atksOrigin count]; i++) {
-        CGBattleUnit *b = [_atksOrigin[i] copy];
+        CGUnit *b = [_atksOrigin[i] copy];
         b.team = CGBattleTeamAtker;
         b.location = i;
         [_aliveSet addObject:b];
     }
     
     for (int i=0; i<[_defsOrigin count]; i++) {
-        CGBattleUnit *b = [_defsOrigin[i] copy];
+        CGUnit *b = [_defsOrigin[i] copy];
         b.team = CGBattleTeamDefer;
         b.location = kTeamBLocationOffset + i;
         [_aliveSet addObject:b];
@@ -90,7 +90,7 @@
 - (int)aliveCountWithTeamType:(CGBattleTeamType)type
 {
     int count = 0;
-    for (CGBattleUnit *o in _aliveSet) {
+    for (CGUnit *o in _aliveSet) {
         if (o.team == type) {
             count++;
         }
@@ -99,9 +99,9 @@
 }
 
 
-- (CGBattleUnit *)searchUnitByLocation:(int)loc
+- (CGUnit *)searchUnitByLocation:(int)loc
 {
-    for (CGBattleUnit *unit in self.aliveSet) {
+    for (CGUnit *unit in self.aliveSet) {
         if (unit.location == loc) {
             return unit;
         }

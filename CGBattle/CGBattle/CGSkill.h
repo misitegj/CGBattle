@@ -53,7 +53,7 @@ typedef NS_ENUM(NSUInteger, CGSkillBuffType) {
 @property (nonatomic, assign) float k;
 @end
 
-@class CGBattleUnit;
+@class CGUnit;
 
 // 技能
 @interface CGSkill : NSObject
@@ -72,8 +72,8 @@ typedef NS_ENUM(NSUInteger, CGSkillBuffType) {
 
 + (CGSkill *)skillWithSID:(CGSkillID)SID;
 
-- (NSArray *)castBySrc:(CGBattleUnit *)src
-                 toDes:(CGBattleUnit *)des;
+- (NSArray *)castBySrc:(CGUnit *)src
+                 toDes:(CGUnit *)des;
 
 @end
 
