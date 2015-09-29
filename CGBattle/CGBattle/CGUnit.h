@@ -101,7 +101,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL isActioned;
 @property (nonatomic, assign) CGBattleTeamType team; //
 
-@property (nonatomic, strong) NSMutableArray *buffs; // 增益
+@property (nonatomic, strong) NSMutableSet *buffs; // 增益
 
 @property (nonatomic, assign) int location; // 位置0-9
 @property (nonatomic, assign) int isAlive; // 是否存活
@@ -113,6 +113,18 @@ typedef enum : NSUInteger {
                 world:(CGWorld *)world;
 
 - (BOOL)canMeleeHitBack;
+
+- (int)attributesWithBuffType:(CGSkillBuffType)type value:(int)value; // 计算buff params 后的战斗属性值
+- (void)addBuffParam:(CGSkillBuffParam *)param;
+- (void)updateBuffParams;
+
+// 战斗中得属性值, 加上buff params 后的结果
+- (int)battleAtk;
+- (int)battleDef;
+- (int)battleAgi;
+- (int)battleRep;
+- (int)battleSpr;
+
 @end
 
 // 宠物

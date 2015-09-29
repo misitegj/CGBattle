@@ -46,11 +46,18 @@ typedef NS_ENUM(NSUInteger, CGSkillBuffType) {
     
 };
 
+typedef NS_ENUM(NSUInteger, CGBuffTargetType) {
+    CGSkillBuffTargetScr, // buff 是释放在自己身上的
+    CGSkillBuffTargetDes, // 目标身上
+};
+
 // 增益或损害参数, var = var * k + a
 @interface CGSkillBuffParam : NSObject
 @property (nonatomic, assign) CGSkillBuffType t;
+@property (nonatomic, assign) CGBuffTargetType tarType;
 @property (nonatomic, assign) float a;
 @property (nonatomic, assign) float k;
+@property (nonatomic, assign) int duration;// 持续回合
 @end
 
 @class CGUnit;
@@ -71,25 +78,49 @@ typedef NS_ENUM(NSUInteger, CGSkillBuffType) {
 @property (nonatomic, assign) int level; // 等级
 
 + (CGSkill *)skillWithSID:(CGSkillID)SID;
+- (CGSkill *)initWithSID:(CGSkillID)SID;
 
 - (NSArray *)castBySrc:(CGUnit *)src
                  toDes:(CGUnit *)des;
 
+
+
+
+- (BOOL)canDoMeleeDamageBySrc:(CGUnit *)src
+                        toDes:(CGUnit *)des;
+
+- (NSArray *)doMeleeFailedDamageBySrc:(CGUnit *)src
+                                toDes:(CGUnit *)des
+                               damage:(int)damage;
+
+
+- (BOOL)canDoMagicDamageBySrc:(CGUnit *)src
+                        toDes:(CGUnit *)des;
+
+- (NSArray *)doMagicFailedDamageBySrc:(CGUnit *)src
+                                toDes:(CGUnit *)des
+                               damage:(int)damage;
+
+# pragma mark -
+
+// 是否命中
+- (BOOL)isHitSrc:(CGUnit *)src
+             des:(CGUnit *)des;
+
+// 伤害系数 90%~110%
+- (float)damageK;
+
+// 是否可以反击
+- (BOOL)hasHitBack:(CGUnit *)util;
+
+// 反击是否触发概率
+- (BOOL)isHitBackTrigger:(CGUnit *)src;
+
+- (int)damageByAtk:(int)atk
+               def:(int)def
+                 k:(float)k;
+
 @end
 
 
-// 普通物理攻击
-@interface CGSkillMeleeNormal : CGSkill
 
-@end
-
-
-// 反击
-@interface CGSkillMeleeHitBackNormal : CGSkill
-@end
-
-
-// 乾坤
-@interface CGSkillMeleeQianKun : CGSkillMeleeNormal
-
-@end

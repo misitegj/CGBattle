@@ -18,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        self.buffs = [NSMutableArray array];
+        self.buffs = [NSMutableSet set];
 
         self.isActioned = NO;
         self.location = -1;
@@ -88,13 +88,48 @@
     return u;
 }
 
+- (int)attributesWithBuffType:(CGSkillBuffType)type value:(int)value
+{
+    NSMutableArray *params = [self buffParamsWithType:type];
+    int result = value;
+    
+    for (CGSkillBuffParam *p in params) {
+        result = result * p.k + p.a;
+    }
+    
+    return result;
+}
+
+- (int)battleAtk
+{
+    return [self attributesWithBuffType:CGSkillBuffAtk value:_atk];
+}
+
+- (int)battleDef
+{
+    return [self attributesWithBuffType:CGSkillBuffDef value:_def];
+}
+
+- (int)battleAgi
+{
+    return [self attributesWithBuffType:CGSkillBuffAgi value:_agi];
+}
+
+- (int)battleRep
+{
+    return [self attributesWithBuffType:CGSkillBuffRep value:_rep];
+}
+
+- (int)battleSpr
+{
+    return [self attributesWithBuffType:CGSkillBuffSpr value:_spr];
+}
+
 
 - (CGAction *)selectSkillAndTarget:(CGWorld *)world
 {
     return [self randomSkillAndTarget:world];
 }
-
-
 
 - (NSArray *)doAction:(CGAction *)action
                 world:(CGWorld *)world
@@ -199,6 +234,48 @@
 {
     return YES;
 }
+
+- (NSMutableArray *)buffParamsWithType:(CGSkillBuffType)type
+{
+    NSMutableArray *params = [NSMutableArray array];
+    
+    for (CGSkillBuffParam *p in self.buffs) {
+        if (p.t == type) {
+            [params addObject:p];
+        }
+    }
+    
+    return params;
+}
+
+- (void)addBuffParam:(CGSkillBuffParam *)param
+{
+    CGSkillBuffParam *pp = nil;
+    for (CGSkillBuffParam *p in self.buffs) {
+        if (p.tarType == param.tarType) {
+            pp = p;
+            break;
+        }
+    }
+    
+    [self.buffs removeObject:pp];
+    [self.buffs addObject:param];
+}
+
+- (void)updateBuffParams
+{
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (CGSkillBuffParam *p in self.buffs) {
+        p.duration--;
+        if (p.duration == 0) {
+            [set addObject:p];
+        }
+    }
+    
+    [self.buffs minusSet:set];
+}
+
 
 @end
 

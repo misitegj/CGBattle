@@ -23,7 +23,13 @@ unsigned long CGRandom1to100()
 // 输入1-100 返回是判定随机100内是否小于等于n
 BOOL CGJudgeRandom1to100(int n)
 {
-    assert(n>=1 && n<=100);
+    if (n >= 100) {
+        return YES;
+    }
+    if (n<=0) {
+        return NO;
+    }
+    
     return CGRandom1to100() < n;
 }
 

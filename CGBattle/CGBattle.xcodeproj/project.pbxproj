@@ -24,6 +24,10 @@
 		185A9BAF1BB42A35005C7A5C /* CGWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BAE1BB42A35005C7A5C /* CGWorld.m */; };
 		185A9BB21BB42E13005C7A5C /* EMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BB11BB42E13005C7A5C /* EMLogManager.m */; };
 		185A9BB51BB63D38005C7A5C /* CGPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BB41BB63D38005C7A5C /* CGPlayer.m */; };
+		185A9BB81BB7B29F005C7A5C /* CGSkillMeleeNormal.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BB71BB7B29F005C7A5C /* CGSkillMeleeNormal.m */; };
+		185A9BBB1BB7B2C3005C7A5C /* CGSkillMeleeQianKun.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BBA1BB7B2C3005C7A5C /* CGSkillMeleeQianKun.m */; };
+		185A9BBE1BB7B2D3005C7A5C /* CGSkillMeleeHitBackNormal.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BBD1BB7B2D3005C7A5C /* CGSkillMeleeHitBackNormal.m */; };
+		185A9BC11BBAD6C2005C7A5C /* CGSkillMeleeZhuRen.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A9BC01BBAD6C2005C7A5C /* CGSkillMeleeZhuRen.m */; };
 		964D183C1BB5240C00157C83 /* CGAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 964D183B1BB5240C00157C83 /* CGAction.m */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +75,14 @@
 		185A9BB11BB42E13005C7A5C /* EMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLogManager.m; sourceTree = "<group>"; };
 		185A9BB31BB63D38005C7A5C /* CGPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPlayer.h; sourceTree = "<group>"; };
 		185A9BB41BB63D38005C7A5C /* CGPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPlayer.m; sourceTree = "<group>"; };
+		185A9BB61BB7B29F005C7A5C /* CGSkillMeleeNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSkillMeleeNormal.h; sourceTree = "<group>"; };
+		185A9BB71BB7B29F005C7A5C /* CGSkillMeleeNormal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSkillMeleeNormal.m; sourceTree = "<group>"; };
+		185A9BB91BB7B2C3005C7A5C /* CGSkillMeleeQianKun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSkillMeleeQianKun.h; sourceTree = "<group>"; };
+		185A9BBA1BB7B2C3005C7A5C /* CGSkillMeleeQianKun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSkillMeleeQianKun.m; sourceTree = "<group>"; };
+		185A9BBC1BB7B2D3005C7A5C /* CGSkillMeleeHitBackNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSkillMeleeHitBackNormal.h; sourceTree = "<group>"; };
+		185A9BBD1BB7B2D3005C7A5C /* CGSkillMeleeHitBackNormal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSkillMeleeHitBackNormal.m; sourceTree = "<group>"; };
+		185A9BBF1BBAD6C2005C7A5C /* CGSkillMeleeZhuRen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSkillMeleeZhuRen.h; sourceTree = "<group>"; };
+		185A9BC01BBAD6C2005C7A5C /* CGSkillMeleeZhuRen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSkillMeleeZhuRen.m; sourceTree = "<group>"; };
 		964D183A1BB5240C00157C83 /* CGAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAction.h; sourceTree = "<group>"; };
 		964D183B1BB5240C00157C83 /* CGAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +132,14 @@
 				185A9BB41BB63D38005C7A5C /* CGPlayer.m */,
 				180150761BAE59740081A5E9 /* CGSkill.h */,
 				180150771BAE59740081A5E9 /* CGSkill.m */,
+				185A9BB61BB7B29F005C7A5C /* CGSkillMeleeNormal.h */,
+				185A9BB71BB7B29F005C7A5C /* CGSkillMeleeNormal.m */,
+				185A9BBC1BB7B2D3005C7A5C /* CGSkillMeleeHitBackNormal.h */,
+				185A9BBD1BB7B2D3005C7A5C /* CGSkillMeleeHitBackNormal.m */,
+				185A9BB91BB7B2C3005C7A5C /* CGSkillMeleeQianKun.h */,
+				185A9BBA1BB7B2C3005C7A5C /* CGSkillMeleeQianKun.m */,
+				185A9BBF1BBAD6C2005C7A5C /* CGSkillMeleeZhuRen.h */,
+				185A9BC01BBAD6C2005C7A5C /* CGSkillMeleeZhuRen.m */,
 				964D183A1BB5240C00157C83 /* CGAction.h */,
 				964D183B1BB5240C00157C83 /* CGAction.m */,
 				180150731BAE58EA0081A5E9 /* CGUnit.h */,
@@ -277,15 +297,19 @@
 			files = (
 				1801506F1BAD60120081A5E9 /* CGBattleManager.m in Sources */,
 				1801504D1BAD5E8D0081A5E9 /* ViewController.m in Sources */,
+				185A9BB81BB7B29F005C7A5C /* CGSkillMeleeNormal.m in Sources */,
 				1801504A1BAD5E8D0081A5E9 /* AppDelegate.m in Sources */,
 				185A9BAC1BB42A14005C7A5C /* CGRound.m in Sources */,
 				185A9BB51BB63D38005C7A5C /* CGPlayer.m in Sources */,
 				185A9BAF1BB42A35005C7A5C /* CGWorld.m in Sources */,
 				180150721BAE2F200081A5E9 /* CG.m in Sources */,
+				185A9BBB1BB7B2C3005C7A5C /* CGSkillMeleeQianKun.m in Sources */,
+				185A9BBE1BB7B2D3005C7A5C /* CGSkillMeleeHitBackNormal.m in Sources */,
 				964D183C1BB5240C00157C83 /* CGAction.m in Sources */,
 				185A9BA61BB429FE005C7A5C /* CGBattle.m in Sources */,
 				180150781BAE59740081A5E9 /* CGSkill.m in Sources */,
 				180150471BAD5E8D0081A5E9 /* main.m in Sources */,
+				185A9BC11BBAD6C2005C7A5C /* CGSkillMeleeZhuRen.m in Sources */,
 				180150751BAE58EA0081A5E9 /* CGUnit.m in Sources */,
 				1801507B1BAE5E3D0081A5E9 /* CGBattleLog.m in Sources */,
 				185A9BB21BB42E13005C7A5C /* EMLogManager.m in Sources */,
