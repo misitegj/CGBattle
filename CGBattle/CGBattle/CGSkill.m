@@ -146,7 +146,7 @@
 
 # pragma mark -
 
-// 是否命中
+// 是否命中 k
 - (BOOL)isHitSrc:(CGUnit *)src
              des:(CGUnit *)des
 {
